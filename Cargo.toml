@@ -1,0 +1,31 @@
+[package]
+name = "rscribble"
+version = "0.1.0"
+authors = ["Dom Rodriguez <shymega@shymega.org.uk>"]
+repository = "https://github.com/shymega/rscribble.git"
+homepage = "https://github.com/shymega/rscribble"
+license = "GPL-3.0"
+readme = "README.md"
+description = "A modular scrobbler for a variety of music players."
+
+[lib]
+name = "rscribble"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rsc"
+path = "src/bin/rscribble.rs"
+
+[dependencies]
+mpd = "0.0.11"
+log = "0.3.6"
+time = "0.1.35"
+
+[dependencies.clippy]
+version = "0.0.103"
+optional = true
+
+[dependencies.clap]
+version = "2"
+features = [ "suggestions", "color", "wrap_help"]
+
