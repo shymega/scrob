@@ -14,10 +14,12 @@
 // along with Xtensis.  If not, see <http://www.gnu.org/licenses/>
 
 extern crate clap;
+extern crate mpd;
 extern crate rscribble;
 
-use clap::{App, Arg, ArgMatches, SubCommand};
+use mpd::Client;
 
+use clap::{App, Arg, ArgMatches, SubCommand};
 
 const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
@@ -40,4 +42,19 @@ fn main() {
 
     println!("rscribble starting NOW..");
     println!("Version: {}", VERSION);
+
+    let mut conn = Client::connect("127.0.0.1:6600").unwrap();
+
+    let curr_song = conn.currentsong().unwrap().unwrap();
+    let curr_song_title = curr_song.title.unwrap();
+    let tags = curr_song.tags;
+
+    match tags.get("Artist") {
+        Some(x) => {
+            println!("The artist is: {artist}\nThe title is: {title}",
+                     artist = x,
+                     title = curr_song_title)
+        }
+        None => println!("Could not find the specified artist."),
+    }
 }
