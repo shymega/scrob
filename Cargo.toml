@@ -13,7 +13,7 @@ name = "rscribble"
 path = "src/lib.rs"
 
 [[bin]]
-name = "rsc"
+name = "rscr"
 path = "src/bin/rscribble.rs"
 
 [dependencies]
