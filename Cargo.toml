@@ -1,12 +1,12 @@
 [package]
-name = "rscribble"
-version = "0.1.0"
 authors = ["Dom Rodriguez <shymega@shymega.org.uk>"]
-repository = "https://github.com/shymega/rscribble.git"
+description = "A modular scrobbler for a variety of music players."
 homepage = "https://github.com/shymega/rscribble"
 license = "GPL-3.0"
+name = "rscribble"
 readme = "README.md"
-description = "A modular scrobbler for a variety of music players."
+repository = "https://github.com/shymega/rscribble.git"
+version = "0.1.0"
 
 [lib]
 name = "rscribble"
@@ -17,15 +17,15 @@ name = "rsc"
 path = "src/bin/rscribble.rs"
 
 [dependencies]
-mpd = "0.0.11"
 log = "0.3.6"
+mpd = "0.0.11"
 time = "0.1.35"
 
 [dependencies.clippy]
-version = "0.0.103"
 optional = true
+version = "0.0.103"
 
 [dependencies.clap]
-version = "2"
 features = [ "suggestions", "color", "wrap_help"]
+version = "2"
 
