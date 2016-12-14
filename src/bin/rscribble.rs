@@ -17,9 +17,12 @@ extern crate clap;
 extern crate mpd;
 extern crate rscribble;
 
+use mpd::idle::Idle;
 use mpd::Client;
+use mpd::idle::Subsystem::Player;
+use std::collections::BTreeMap;
 
-use clap::{App, Arg, ArgMatches, SubCommand};
+use clap::{App, Arg, ArgMatches};
 
 const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
@@ -37,24 +40,36 @@ fn get_arguments() -> ArgMatches<'static> {
         .get_matches()
 }
 
+fn get_artist(tags: BTreeMap<String, String>) -> String {
+    match tags.get("Artist") {
+        Some(x) => x.to_owned(),
+        None => "None".to_owned(),
+    }
+}
+
 fn main() {
-    let matches = get_arguments();
+    let _ = get_arguments();
 
     println!("rscribble starting NOW..");
-    println!("Version: {}", VERSION);
 
-    let mut conn = Client::connect("127.0.0.1:6600").unwrap();
+    let addr = "127.0.0.1:6600";
+    let mut conn = Client::connect(addr).unwrap();
 
-    let curr_song = conn.currentsong().unwrap().unwrap();
-    let curr_song_title = curr_song.title.unwrap();
-    let tags = curr_song.tags;
+    loop {
+        let _ = conn.wait(&[Player]);
+        match conn.currentsong().unwrap() {
+            Some(s) => {
+                println!("New song detected.");
+                let song_title = s.title.unwrap();
+                let song_artist = get_artist(s.tags);
+                println!("Song title: {}", song_title);
+                println!("Song artist: {}", song_artist);
+            }
+            None => {
+                println!("No value.");
 
-    match tags.get("Artist") {
-        Some(x) => {
-            println!("The artist is: {artist}\nThe title is: {title}",
-                     artist = x,
-                     title = curr_song_title)
+            }
         }
-        None => println!("Could not find the specified artist."),
     }
+
 }
