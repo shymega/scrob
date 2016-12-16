@@ -25,16 +25,16 @@ use std::collections::BTreeMap;
 /// Return the Artist in a BTree of tags.
 pub fn get_artist(tags: BTreeMap<String, String>) -> String {
     match tags.get("Artist") {
-        Some(x) => x.to_owned(),
-        None => "None".to_owned(),
+        Some(x) => x.to_string(),
+        None => "None".to_string(),
     }
 }
 
 /// Return the Album in a BTree of tags.
 pub fn get_album(tags: BTreeMap<String, String>) -> String {
     match tags.get("Album") {
-        Some(x) => x.to_owned(),
-        None => "None".to_owned(),
+        Some(x) => x.to_string(),
+        None => "None".to_string(),
     }
 }
 
