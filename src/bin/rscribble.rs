@@ -21,7 +21,7 @@ use mpd::idle::Idle;
 use mpd::Client;
 use mpd::idle::Subsystem::Player;
 use std::collections::BTreeMap;
-use rscribble::sources::mpd::loop_mpd_player_song_artist_disp;
+use rscribble::sources::mpd::display_mpd_songs;
 
 use clap::{App, Arg, ArgMatches};
 
@@ -45,6 +45,6 @@ fn main() {
     let args = get_arguments();
 
     println!("rscribble starting NOW..");
-    loop_mpd_player_song_artist_disp();
+    display_mpd_songs();
 
 }

@@ -39,7 +39,7 @@ pub fn get_album(tags: BTreeMap<String, String>) -> String {
 }
 
 /// Loop over MPD `Player` events, and display the song and artist.
-pub fn loop_mpd_player_song_artist_disp() {
+pub fn display_mpd_songs() {
     let addr = "127.0.0.1:6600";
     let mut conn = Client::connect(addr).unwrap();
 
