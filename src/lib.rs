@@ -24,3 +24,5 @@
 #![cfg_attr(feature="clippy", plugin(clippy))]
 
 extern crate mpd;
+
+pub mod sources;

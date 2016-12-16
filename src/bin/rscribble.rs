@@ -21,6 +21,7 @@ use mpd::idle::Idle;
 use mpd::Client;
 use mpd::idle::Subsystem::Player;
 use std::collections::BTreeMap;
+use rscribble::sources::mpd::loop_mpd_player_song_artist_disp;
 
 use clap::{App, Arg, ArgMatches};
 
@@ -40,36 +41,10 @@ fn get_arguments() -> ArgMatches<'static> {
         .get_matches()
 }
 
-fn get_artist(tags: BTreeMap<String, String>) -> String {
-    match tags.get("Artist") {
-        Some(x) => x.to_owned(),
-        None => "None".to_owned(),
-    }
-}
-
 fn main() {
-    let _ = get_arguments();
+    let args = get_arguments();
 
     println!("rscribble starting NOW..");
-
-    let addr = "127.0.0.1:6600";
-    let mut conn = Client::connect(addr).unwrap();
-
-    loop {
-        let _ = conn.wait(&[Player]);
-        match conn.currentsong().unwrap() {
-            Some(s) => {
-                println!("New song detected.");
-                let song_title = s.title.unwrap();
-                let song_artist = get_artist(s.tags);
-                println!("Song title: {}", song_title);
-                println!("Song artist: {}", song_artist);
-            }
-            None => {
-                println!("No value.");
-
-            }
-        }
-    }
+    loop_mpd_player_song_artist_disp();
 
 }
