@@ -22,6 +22,24 @@ use mpd::Client;
 use mpd::idle::Subsystem::Player;
 use std::collections::BTreeMap;
 
+/// Struct for a Song.
+#[derive(Default, Debug)]
+struct Song {
+    pub title: String,
+    pub album: String,
+    pub artist: String,
+}
+
+impl Song {
+    pub fn new() -> Song {
+        Song {
+            title: "".to_string(),
+            album: "".to_string(),
+            artist: "".to_string(),
+        }
+    }
+}
+
 /// Return the Artist in a BTree of tags.
 pub fn get_artist(tags: BTreeMap<String, String>) -> String {
     match tags.get("Artist") {
@@ -48,13 +66,15 @@ pub fn display_mpd_songs() {
         match conn.currentsong().unwrap() {
             Some(s) => {
                 println!("New song detected.");
-                let song_title = s.title.unwrap();
-                let song_artist = get_artist(s.tags.clone());
-                let song_album = get_album(s.tags.clone());
+                let mut song = Song::new();
 
-                println!("Song title: {}", song_title);
-                println!("Song artist: {}", song_artist);
-                println!("Song album: {}", song_album);
+                song.title = s.title.unwrap();
+                song.artist = get_artist(s.tags.clone());
+                song.album = get_album(s.tags.clone());
+
+                println!("Song title: {}", song.title);
+                println!("Song artist: {}", song.artist);
+                println!("Song album: {}", song.album);
             }
             None => {
                 println!("No song detected.");
