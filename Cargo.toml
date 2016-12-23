@@ -23,9 +23,8 @@ time = "0.1.35"
 
 [dependencies.clippy]
 optional = true
-version = "0.0.103"
+version = "0.0.104"
 
 [dependencies.clap]
 features = [ "suggestions", "color", "wrap_help"]
 version = "2"
-
