@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ ! -d "$HOME/kcov" ]]; then
+    git clone https://github.com/SimonKagstrom/kcov
+    cd kcov || exit 1
+    mkdir build
+    cd build || exit 1
+    cmake -DCMAKE_INSTALL_PREFIX:PATH="$HOME/kcov" ..
+    make
+    make install
+fi
+
+pip install --user sphinx sphinx-autobuild
+
+exit

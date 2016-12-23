@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ -d "$HOME/kcov" ]]; then
+    export PATH="$HOME/kcov/bin:$PATH"
+else
+    exit 1
+fi
+
+# Generate coverage files
+
+echo "INFO: Generating coverage.."
+for file in target/debug/rscr-*; do
+    printf "Generating coverage for file: %s\n" "${file}"
+    mkdir -p "target/cov/$(basename "$file")"
+    kcov --exclude-pattern=/.cargo,/usr/lib \
+         --verify "target/cov/$(basename "$file")" \
+         "$file"
+done
+
+bash <(curl -s https://codecov.io/bash)
+
+echo "INFO: Uploaded code coverage."
