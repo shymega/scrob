@@ -40,7 +40,7 @@ impl Song {
     }
 }
 
-/// Return the Artist in a BTree of tags.
+/// Return the Artist in a `BTree` of tags.
 pub fn get_artist(tags: BTreeMap<String, String>) -> String {
     match tags.get("Artist") {
         Some(x) => x.to_string(),
@@ -48,7 +48,7 @@ pub fn get_artist(tags: BTreeMap<String, String>) -> String {
     }
 }
 
-/// Return the Album in a BTree of tags.
+/// Return the Album in a `BTree` of tags.
 pub fn get_album(tags: BTreeMap<String, String>) -> String {
     match tags.get("Album") {
         Some(x) => x.to_string(),
