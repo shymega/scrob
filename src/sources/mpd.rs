@@ -63,24 +63,20 @@ pub fn display_mpd_songs() {
 
     loop {
         let _ = conn.wait(&[Player]);
-        match conn.currentsong().unwrap() {
-            Some(s) => {
-                println!("New song detected.");
-                let mut song = Song::new();
+        if let Some(s) = conn.currentsong().unwrap() {
+            println!("New song detected.");
+            let mut song = Song::new();
 
+            {
                 song.title = s.title.unwrap();
                 song.artist = get_artist(s.tags.clone());
                 song.album = get_album(s.tags.clone());
+            }
 
-                println!("Song title: {}", song.title);
-                println!("Song artist: {}", song.artist);
-                println!("Song album: {}", song.album);
-            }
-            None => {
-                println!("No song detected.");
-            }
+            println!("Song title: {}", song.title);
+            println!("Song artist: {}", song.artist);
+            println!("Song album: {}", song.album);
         }
     }
-
 
 }
