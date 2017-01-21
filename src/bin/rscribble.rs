@@ -16,6 +16,7 @@
 extern crate clap;
 extern crate mpd;
 extern crate rscribble;
+extern crate librefm;
 
 use rscribble::sources::mpd::display_mpd_songs;
 
@@ -42,5 +43,4 @@ fn main() {
 
     println!("rscribble starting NOW..");
     display_mpd_songs();
-
 }
