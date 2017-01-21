@@ -20,6 +20,7 @@ path = "src/bin/rscribble.rs"
 log = "0.3.6"
 mpd = "0.0.11"
 time = "0.1.35"
+librefm = { path = "../librefm-rs" }
 
 [dependencies.clippy]
 optional = true
@@ -28,7 +29,3 @@ version = "0.0.104"
 [dependencies.clap]
 features = [ "suggestions", "color", "wrap_help"]
 version = "2"
-
-[dependencies.librefm]
-git = "https://github.com/shymega/librefm-rs.git"
-branch = "master"
