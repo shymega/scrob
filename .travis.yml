@@ -35,7 +35,7 @@ notifications:
   irc:
     channels:
       - "irc.shymega.org.uk#rscribble"
-    nick: rex-travis
+    nick: rscr-travis
     on_success: never
     on_failure: always
     use_notice: true
