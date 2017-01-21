@@ -159,7 +159,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "librefm"
 version = "0.1.0"
-source = "git+https://github.com/shymega/librefm-rs.git#2c095865cf5236072a56c3e502787ca5726c8c85"
+source = "git+https://github.com/shymega/librefm-rs.git#b1d716a1ee21306e4d61e3885e161f887a97fce6"
 dependencies = [
  "hyper 0.9.14 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
