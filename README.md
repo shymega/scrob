@@ -1,4 +1,4 @@
-# rscrobble
+# RScrobble
 
 Modular audio scrobbler written in Rust. Supports multiple sources,
 such as MPRIS and MPD. (That's pretty much it, right now.)
