@@ -3,6 +3,15 @@
 Modular audio scrobbler written in Rust. Supports multiple sources,
 such as MPRIS and MPD. (That's pretty much it, right now.)
 
+RScrobble works with the concept of "sources" and "targets".
+
+Targets are a *destination* for scrobbles, such as GNU FM (Libre.fm,
+for example) or Last.fm.
+
+Sources are a *source* of data for scrobbles to be formed from, such
+as MPD, or MPRIS - MPRIS could be supplied, in turn, by the Spotify
+desktop client or Tomahawk.
+
 ## Project status
 
 I'm currently waiting on the further development of [rustfm][rustfm],
