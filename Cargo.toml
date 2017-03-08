@@ -1,26 +1,25 @@
 [package]
 authors = ["Dom Rodriguez <shymega@shymega.org.uk>"]
 description = "A modular scrobbler for a variety of music players."
-homepage = "https://github.com/shymega/rscribble"
+homepage = "https://github.com/shymega/rscrobble"
 license = "GPL-3.0"
-name = "rscribble"
+name = "rscrobble"
 readme = "README.md"
 repository = "https://github.com/shymega/rscribble.git"
 version = "0.1.0"
 
 [lib]
-name = "rscribble"
+name = "rscrobble"
 path = "src/lib.rs"
 
 [[bin]]
-name = "rscr"
+name = "rscrobble"
 path = "src/bin/rscribble.rs"
 
 [dependencies]
 log = "0.3.6"
 mpd = "0.0.11"
 time = "0.1.35"
-librefm = { path = "../librefm-rs" }
 
 [dependencies.clippy]
 optional = true
