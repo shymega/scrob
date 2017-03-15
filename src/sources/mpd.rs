@@ -29,6 +29,7 @@ struct Song {
     pub album: String,
     pub artist: String,
     pub album_artist: String,
+    pub date: String,
 }
 
 impl Song {
@@ -38,6 +39,7 @@ impl Song {
             album: "".to_string(),
             artist: "".to_string(),
             album_artist: "".to_string(),
+            date: "".to_string(),
         }
     }
 }
@@ -61,6 +63,14 @@ pub fn get_album(tags: BTreeMap<String, String>) -> String {
 /// Return the AlbumArtist in a `BTree` of tags.
 pub fn get_album_artist(tags: BTreeMap<String, String>) -> String {
     match tags.get("AlbumArtist") {
+        Some(x) => x.to_string(),
+        None => "None".to_string(),
+    }
+}
+
+/// Return the Date in a `BTree` of tags.
+pub fn get_date(tags: BTreeMap<String, String>) -> String {
+    match tags.get("Date") {
         Some(x) => x.to_string(),
         None => "None".to_string(),
     }
