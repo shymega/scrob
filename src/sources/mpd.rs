@@ -129,6 +129,11 @@ pub fn display_mpd_songs() {
                 song.title = s.title.unwrap();
                 song.artist = get_artist(s.tags.clone());
                 song.album = get_album(s.tags.clone());
+                song.album_artist = get_album_artist(s.tags.clone());
+                song.date = get_date(s.tags.clone());
+                song.genre = get_genre(s.tags.clone());
+                song.track = get_track(s.tags.clone());
+                song.composer = get_composer(s.tags.clone());
             }
 
             println!("Song title: {}", song.title);
