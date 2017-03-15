@@ -28,6 +28,7 @@ struct Song {
     pub title: String,
     pub album: String,
     pub artist: String,
+    pub album_artist: String,
 }
 
 impl Song {
@@ -36,6 +37,7 @@ impl Song {
             title: "".to_string(),
             album: "".to_string(),
             artist: "".to_string(),
+            album_artist: "".to_string(),
         }
     }
 }
@@ -56,6 +58,13 @@ pub fn get_album(tags: BTreeMap<String, String>) -> String {
     }
 }
 
+/// Return the AlbumArtist in a `BTree` of tags.
+pub fn get_album_artist(tags: BTreeMap<String, String>) -> String {
+    match tags.get("AlbumArtist") {
+        Some(x) => x.to_string(),
+        None => "None".to_string(),
+    }
+}
 /// Loop over MPD `Player` events, and display the song and artist.
 pub fn display_mpd_songs() {
     let addr = "127.0.0.1:6600";
