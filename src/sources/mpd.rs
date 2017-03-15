@@ -89,7 +89,15 @@ pub fn get_genre(tags: BTreeMap<String, String>) -> String {
 /// Loop over MPD `Player` events, and display the song and artist.
 pub fn display_mpd_songs() {
     let addr = "127.0.0.1:6600";
-    let mut conn = Client::connect(addr).unwrap();
+    let mut conn = match Client::connect(addr) {
+        Ok(x) => x,
+        Err(e) => {
+            println!("Error found while creating client..");
+            println!("Error: {}", e);
+            println!("CANNOT CONTINUE.");
+            ::std::process::exit(1);
+        }
+    };
 
     loop {
         let _ = conn.wait(&[Player]);
