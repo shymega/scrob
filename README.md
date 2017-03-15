@@ -1,9 +1,9 @@
-# RScrobble
+# rscribble
 
 Modular audio scrobbler written in Rust. Supports multiple sources,
 such as MPRIS and MPD. (That's pretty much it, right now.)
 
-RScrobble works with the concept of "sources" and "targets".
+rscribble works with the concept of "sources" and "targets".
 
 Targets are a *destination* for scrobbles, such as GNU FM (Libre.fm,
 for example) or Last.fm.
@@ -17,6 +17,6 @@ desktop client or Tomahawk.
 I'm currently waiting on the further development of [rustfm][rustfm],
 which I am hoping will be able to support both GNU FM and Last.fm
 (They have similar APIs) as multiple backends. This means that
-rscrobble can _also_ support multiple "scrobble targets" as well.
+rscribble can _also_ support multiple "scrobble targets" as well.
 
 [rustfm]: https://github.com/RoxasShadow/rustfm

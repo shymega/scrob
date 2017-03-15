@@ -1,19 +1,19 @@
 [package]
 authors = ["Dom Rodriguez <shymega@shymega.org.uk>"]
 description = "A modular scrobbler for a variety of music players."
-homepage = "https://github.com/shymega/rscrobble"
+homepage = "https://github.com/shymega/rscribble"
 license = "GPL-3.0"
-name = "rscrobble"
+name = "rscribble"
 readme = "README.md"
 repository = "https://github.com/shymega/rscribble.git"
 version = "0.1.0"
 
 [lib]
-name = "rscrobble"
+name = "rscribble"
 path = "src/lib.rs"
 
 [[bin]]
-name = "rscrobble"
+name = "rscribble"
 path = "src/bin/rscribble.rs"
 
 [dependencies]
