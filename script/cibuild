@@ -9,7 +9,4 @@ echo "INFO: Building and testing.."
 cargo build
 cargo test
 
-echo "INFO: Building docs.."
-cargo doc
-
 exit
