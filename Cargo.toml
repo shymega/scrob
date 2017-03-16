@@ -24,6 +24,9 @@ path = "src/bin/rscribctl.rs"
 log = "0.3.7"
 mpd = "0.0.11"
 time = "0.1.36"
+serde = "0.8.1"
+serde_json = "0.8.1"
+serde_derive = "*"
 
 [dependencies.clippy]
 optional = true
