@@ -13,8 +13,12 @@ name = "rscribble"
 path = "src/lib.rs"
 
 [[bin]]
-name = "rscribble"
-path = "src/bin/rscribble.rs"
+name = "rscrib"
+path = "src/bin/rscrib.rs"
+
+[[bin]]
+name = "rscribctl"
+path = "src/bin/rscribctl.rs"
 
 [dependencies]
 log = "0.3.6"

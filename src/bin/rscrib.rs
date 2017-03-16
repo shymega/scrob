@@ -24,10 +24,9 @@ use clap::{App, Arg, ArgMatches};
 const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
 fn get_arguments() -> ArgMatches<'static> {
-    App::new("rscribble")
+    App::new("rscrib")
         .version(VERSION)
         .author("Dom Rodriguez <shymega@shymega.org.uk>")
-        .about("Extensible editing: screw limits.")
         .about("A modular scrobbler for a variety of music players.")
         .arg(Arg::with_name("v")
             .short("v")

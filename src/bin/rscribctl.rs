@@ -13,17 +13,25 @@
 // You should have received a copy of the GNU General Public License
 // along with rscribble.  If not, see <http://www.gnu.org/licenses/>
 
-//! The library for xtensis/core
+extern crate clap;
 
-#![deny(missing_docs, missing_debug_implementations,
-        missing_copy_implementations, trivial_casts,
-        trivial_numeric_casts, unused_import_braces,
-        unused_qualifications, clippy)]
+use clap::{App, Arg, ArgMatches};
 
-#![cfg_attr(feature="clippy", feature(plugin))]
-#![cfg_attr(feature="clippy", plugin(clippy))]
+const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
-extern crate mpd;
-extern crate time;
+fn get_arguments() -> ArgMatches<'static> {
+    App::new("rscribctl")
+        .version(VERSION)
+        .author("Dom Rodriguez <shymega@shymega.org.uk>")
+        .about("A modular scrobbler for a variety of music players: control program")
+        .arg(Arg::with_name("v")
+            .short("v")
+            .multiple(true)
+            .required(false)
+            .help("Sets the level of logging verbosity."))
+        .get_matches()
+}
 
-pub mod sources;
+fn main() {
+    let args = get_arguments();
+}
