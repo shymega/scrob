@@ -34,8 +34,8 @@ notifications:
     on_failure: always
   irc:
     channels:
-      - "irc.shymega.org.uk#rscribble"
-    nick: rscr-travis
+      - "chat.freenode.net#rscribble"
+    nick: rscrib-travis
     on_success: never
     on_failure: always
     use_notice: true
