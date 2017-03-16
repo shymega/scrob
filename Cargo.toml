@@ -13,8 +13,8 @@ name = "rscribble"
 path = "src/lib.rs"
 
 [[bin]]
-name = "rscrib"
-path = "src/bin/rscrib.rs"
+name = "rscribd"
+path = "src/bin/rscribd.rs"
 
 [[bin]]
 name = "rscribctl"
