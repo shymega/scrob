@@ -18,10 +18,7 @@
 #![deny(missing_docs, missing_debug_implementations,
         missing_copy_implementations, trivial_casts,
         trivial_numeric_casts, unused_import_braces,
-        unused_qualifications, clippy)]
-
-#![cfg_attr(feature="clippy", feature(plugin))]
-#![cfg_attr(feature="clippy", plugin(clippy))]
+        unused_qualifications)]
 
 extern crate mpd;
 extern crate time;
