@@ -21,14 +21,14 @@ name = "rscribctl"
 path = "src/bin/rscribctl.rs"
 
 [dependencies]
-log = "0.3.6"
+log = "0.3.7"
 mpd = "0.0.11"
-time = "0.1.35"
+time = "0.1.36"
 
 [dependencies.clippy]
 optional = true
-version = "0.0.104"
+version = "0.0.119"
 
 [dependencies.clap]
-features = [ "suggestions", "color", "wrap_help"]
-version = "2"
+features = ["suggestions", "color", "wrap_help"]
+version = "2.21.1"
