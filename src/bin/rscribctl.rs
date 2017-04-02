@@ -34,4 +34,5 @@ fn get_arguments() -> ArgMatches<'static> {
 
 fn main() {
     let args = get_arguments();
+    let verbosity_count = args.occurrences_of("v");
 }
