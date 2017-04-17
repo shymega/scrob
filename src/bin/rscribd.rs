@@ -17,9 +17,8 @@ extern crate clap;
 extern crate mpd;
 extern crate rscribble;
 
-use rscribble::sources::mpd::display_mpd_songs;
-
 use clap::{App, Arg, ArgMatches};
+use rscribble::sources::mpd::display_mpd_songs;
 
 const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
