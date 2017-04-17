@@ -16,11 +16,29 @@
 // along with rscribble.  If not, see <http://www.gnu.org/licenses/>
 
 extern crate mpd;
+extern crate rusqlite;
 
-use mpd::idle::Idle;
 use mpd::Client;
+use mpd::idle::Idle;
 use mpd::idle::Subsystem::Player;
+use self::rusqlite::Connection;
 use std::collections::BTreeMap;
+use std::path::Path;
+use std::process::exit;
+
+/// Struct for a DB entry for a song.
+#[derive(Debug)]
+struct DbSong {
+    id: i32,
+    title: String,
+    album: String,
+    artist: String,
+    album_artist: String,
+    genre: String,
+    track: String,
+    composer: String,
+    date: String,
+}
 
 /// Struct for a Song.
 #[derive(Default, Debug)]
@@ -113,33 +131,72 @@ pub fn display_mpd_songs() {
         Ok(x) => x,
         Err(e) => {
             println!("Error found while creating client..");
-            println!("Error: {}", e);
-            println!("CANNOT CONTINUE.");
-            ::std::process::exit(1);
+            println!("Error: {error}", error = e);
+            println!("Cannot proceed, bailing.");
+            exit(1);
+        }
+    };
+
+    let db_path = Path::new("/home/dzrodrig/.rscribble/music.db");
+    let db_conn = match Connection::open(db_path) {
+        Ok(x) => x,
+        Err(e) => {
+            println!("Error found while creating DB connection..");
+            println!("Error: {error}", error = e);
+            println!("Cannot proceed, bailing.");
+            exit(1);
         }
     };
 
     loop {
         let _ = conn.wait(&[Player]);
         if let Some(s) = conn.currentsong().unwrap() {
-            println!("New song detected.");
             let mut song = Song::new();
 
-            {
-                song.title = s.title.unwrap();
-                song.artist = get_artist(s.tags.clone());
-                song.album = get_album(s.tags.clone());
-                song.album_artist = get_album_artist(s.tags.clone());
-                song.date = get_date(s.tags.clone());
-                song.genre = get_genre(s.tags.clone());
-                song.track = get_track(s.tags.clone());
-                song.composer = get_composer(s.tags.clone());
-            }
+            let song = Song {
+                title: s.title.unwrap(),
+                artist: get_artist(s.tags.clone()),
+                album: get_album(s.tags.clone()),
+                album_artist: get_album_artist(s.tags.clone()),
+                date: get_date(s.tags.clone()),
+                genre: get_genre(s.tags.clone()),
+                track: get_track(s.tags.clone()),
+                composer: get_composer(s.tags.clone()),
+            };
 
-            println!("Song title: {}", song.title);
-            println!("Song artist: {}", song.artist);
-            println!("Song album: {}", song.album);
+            let db_song = DbSong {
+                id: 0,
+                title: song.title.to_string(),
+                album: song.album.to_string(),
+                artist: song.artist.to_string(),
+                album_artist: song.album_artist.to_string(),
+                genre: song.genre.to_string(),
+                track: song.track.to_string(),
+                composer: song.composer.to_string(),
+                date: song.date.to_string(),
+            };
+
+            db_conn.execute("INSERT INTO Songs (title, album, artist,
+                          \
+                          album_artist, genre, track, composer, date)
+                             \
+                          VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)",
+                         &[&db_song.title,
+                           &db_song.album,
+                           &db_song.artist,
+                           &db_song.album_artist,
+                           &db_song.genre,
+                           &db_song.track,
+                           &db_song.composer,
+                           &db_song.date])
+                .unwrap();
+
+            println!("**************************");
+            println!("New song playing!");
+            println!("{title}, by {artist}",
+                     title = song.title,
+                     artist = song.artist);
+            println!("**************************");
         }
     }
-
 }
