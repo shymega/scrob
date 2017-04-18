@@ -23,7 +23,6 @@
 extern crate mpd;
 extern crate time;
 
-pub mod logging;
 pub mod sources;
 pub mod targets;
 pub mod utils;
