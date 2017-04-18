@@ -20,6 +20,12 @@
         trivial_numeric_casts, unused_import_braces,
         unused_qualifications)]
 
+#[macro_use]
+extern crate diesel;
+
+#[macro_use]
+extern crate diesel_codegen;
+
 extern crate mpd;
 extern crate time;
 
