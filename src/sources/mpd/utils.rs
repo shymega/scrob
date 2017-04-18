@@ -1,9 +1,6 @@
 //! Utilities module for MPD source.
 
-#[derive(Debug)]
-pub enum RetrieveError {
-    InvalidTag,
-}
+use std::collections::BTreeMap;
 
 /// SongTags is a representation of the tags associated with a
 /// song. This is a BTreeMap with two Strings.
