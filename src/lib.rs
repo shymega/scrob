@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU General Public License
 // along with rscribble.  If not, see <http://www.gnu.org/licenses/>
 
-//! The library for xtensis/core
+//! The library for rscribble
 
 #![deny(missing_docs, missing_debug_implementations,
         missing_copy_implementations, trivial_casts,
