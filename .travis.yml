@@ -6,7 +6,7 @@ cache:
 
 install:
   - "script/bootstrap"
-  
+
 script:
   - "script/cibuild"
 
@@ -34,8 +34,8 @@ notifications:
     on_failure: always
   irc:
     channels:
-      - "chat.freenode.net#rscribble"
-    nick: rscrib-travis
+      - "ircs://irc.mozilla.org:6697/#scrobble.rs"
+    nick: scrob-rs-travis
     on_success: never
     on_failure: always
     use_notice: true

@@ -1,46 +1,31 @@
 [package]
 authors = ["Dom Rodriguez <shymega@shymega.org.uk>"]
-description = "A modular scrobbler for a variety of music players."
-homepage = "https://github.com/shymega/rscribble"
+description = "A modular scrobbler with variety."
+homepage = "https://github.com/shymega/scrobble.rs"
 license = "GPL-3.0"
-name = "rscribble"
+name = "scrobble.rs"
 readme = "README.md"
-repository = "https://github.com/shymega/rscribble.git"
+repository = "https://github.com/shymega/scrobble.rs.git"
 version = "0.1.0"
 
 [lib]
-name = "rscribble"
+name = "scrobble"
 path = "src/lib.rs"
 
 [[bin]]
-name = "rscribd"
-path = "src/bin/rscribd.rs"
+name = "scrobd"
+path = "src/bin/scrobd.rs"
 
 [[bin]]
-name = "rscribctl"
-path = "src/bin/rscribctl.rs"
+name = "scrobctl"
+path = "src/bin/scrobctl.rs"
 
 [dependencies]
-log = "0.3.7"
-mpd = "0.0.11"
-time = "0.1.36"
-serde = "0.8.1"
-serde_json = "0.8.1"
-serde_derive = "*"
-slog = "1.3.2"
-slog-json = "1.2.1"
-slog-term = "1.3.3"
-slog-scope = "*"
-dotenv = "0.8.0"
-
-[dependencies.diesel]
-version = "0.11.0"
-features = ["sqlite"]
-
-[dependencies.diesel_codegen]
-version = "0.11.0"
-features = ["sqlite"]
+log = "0.3.8"
+mpd = "0.0.12"
+time = "0.1.38"
+rusqlite = "0.13.0"
 
 [dependencies.clap]
 features = ["suggestions", "color", "wrap_help"]
-version = "2.21.1"
+version = "2.29.0"
