@@ -13,12 +13,12 @@ name = "scrobble"
 path = "src/lib.rs"
 
 [[bin]]
-name = "scrobd"
-path = "src/bin/scrobd.rs"
+name = "scrobbled"
+path = "src/bin/scrobbled.rs"
 
 [[bin]]
-name = "scrobctl"
-path = "src/bin/scrobctl.rs"
+name = "scrobblectl"
+path = "src/bin/scrobblectl.rs"
 
 [dependencies]
 log = "0.3.8"

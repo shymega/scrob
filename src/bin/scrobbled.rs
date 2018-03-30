@@ -1,4 +1,4 @@
-// This file is part of scrobble.rs.
+// This file is part of scrobble.rs
 
 // scrobble.rs is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,18 +14,19 @@
 // along with scrobble.rs.  If not, see <http://www.gnu.org/licenses/>
 
 extern crate clap;
+extern crate mpd;
+extern crate scrobble;
 
 use clap::{App, Arg, ArgMatches};
+use scrobble::sources::mpd::display_mpd_songs;
 
 const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
 fn get_arguments() -> ArgMatches<'static> {
-    App::new("scrobctl")
+    App::new("scrobd")
         .version(VERSION)
         .author("Dom Rodriguez <shymega@shymega.org.uk>")
-        .about(
-            "A modular scrobbler for a variety of music players: control program",
-        )
+        .about("A modular scrobbler for a variety of music players.")
         .arg(
             Arg::with_name("v")
                 .short("v")
@@ -38,6 +39,8 @@ fn get_arguments() -> ArgMatches<'static> {
 
 fn main() {
     let args = get_arguments();
+    let _verbosity_count = args.occurrences_of("v");
 
-    let verbosity_count = args.occurrences_of("v");
+    println!("scrobble starting NOW..");
+    display_mpd_songs();
 }
