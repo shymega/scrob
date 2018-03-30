@@ -12,6 +12,4 @@ if [[ ! -d "$HOME/kcov" ]]; then
     make install
 fi
 
-pip install --user sphinx sphinx-autobuild
-
 exit
