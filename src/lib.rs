@@ -22,6 +22,7 @@
 
 extern crate mpd;
 extern crate time;
+extern crate mpris;
 
 pub mod db;
 pub mod sources;

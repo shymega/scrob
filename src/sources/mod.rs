@@ -2,3 +2,6 @@
 
 pub mod mpd;
 pub mod mpris;
+mod common;
+
+use self::common::{Song, ScrobbleEvent, ScrobbleSource};
