@@ -29,3 +29,6 @@ rusqlite = "0.13.0"
 features = ["suggestions", "color", "wrap_help"]
 version = "2.31.2"
 
+[profile.release]
+lto = true
+panic = 'abort'
