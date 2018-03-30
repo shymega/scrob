@@ -21,11 +21,11 @@ name = "scrobblectl"
 path = "src/bin/scrobblectl.rs"
 
 [dependencies]
-log = "0.3.8"
+time = "0.1.39"
 mpd = "0.0.12"
-time = "0.1.38"
 rusqlite = "0.13.0"
 
 [dependencies.clap]
 features = ["suggestions", "color", "wrap_help"]
-version = "2.29.0"
+version = "2.31.2"
+
