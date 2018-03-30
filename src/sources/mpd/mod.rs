@@ -25,34 +25,7 @@ use mpd::idle::Subsystem::Player;
 use self::utils::get_tag;
 use std::net::TcpStream;
 use std::process::exit;
-
-/// Struct for a Song.
-#[derive(Default, Debug)]
-struct Song {
-    pub title: String,
-    pub album: String,
-    pub artist: String,
-    pub album_artist: String,
-    pub date: String,
-    pub genre: String,
-    pub track: String,
-    pub composer: String,
-}
-
-impl Song {
-    fn new() -> Song {
-        Song {
-            title: "".to_string(),
-            album: "".to_string(),
-            artist: "".to_string(),
-            album_artist: "".to_string(),
-            date: "".to_string(),
-            genre: "".to_string(),
-            track: "".to_string(),
-            composer: "".to_string(),
-        }
-    }
-}
+use ::sources::Song;
 
 fn get_mpd_conn(addr: &str) -> Client<TcpStream> {
     match Client::connect(addr) {
