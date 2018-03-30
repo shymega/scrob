@@ -19,6 +19,7 @@ extern crate scrobble;
 
 use clap::{App, Arg, ArgMatches};
 use scrobble::sources::mpd::display_mpd_songs;
+use scrobble::sources::mpris::display_mpris_songs;
 
 const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
@@ -42,5 +43,6 @@ fn main() {
     let _verbosity_count = args.occurrences_of("v");
 
     println!("scrobble starting NOW..");
-    display_mpd_songs();
+    // display_mpd_songs();
+    display_mpris_songs();
 }
