@@ -29,11 +29,12 @@ impl Song {
 #[derive(Debug)]
 pub enum ScrobbleEvent {
     NowPlaying(Song),
+    Stopped,
     Scrobble(Song),
 }
 
-pub type ScrobbleStream = Iterator<Item=ScrobbleEvent>;
+// pub type ScrobbleStream = Iterator<Item=ScrobbleEvent>;
 
-pub trait ScrobbleSource {
-    fn into_stream(self) -> Box<ScrobbleStream>;
+pub trait ScrobbleSource<'p> {
+    fn into_stream(&'p mut self) -> Box<Iterator<Item=ScrobbleEvent> + 'p>;
 }

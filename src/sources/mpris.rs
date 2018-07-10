@@ -2,13 +2,14 @@
 //! It is currently a work in progress. This source needs a stable and
 //! well-tested D-Bus library for Rust.
 
-use mpris::{LoopStatus, Metadata, PlaybackStatus, PlayerFinder, Progress, ProgressTracker, Player};
-use ::sources::common::{Song, ScrobbleEvent, ScrobbleStream, ScrobbleSource};
+use std::thread;
+use mpris::{DBusError, Event, LoopStatus, Metadata, PlaybackStatus, PlayerFinder, Progress, ProgressTracker, Player};
+use ::sources::common::{Song, ScrobbleEvent, ScrobbleSource};
 
 /// Loop over MPRIS events, and display new song/artist combos.
 pub fn display_mpris_songs() {
     let mut sources = get_mpris_sources();
-    let player = sources.next().unwrap();
+    let mut player = sources.next().unwrap();
 
     for ev in player.into_stream() {
         println!("Event: {:?}", ev);
@@ -22,62 +23,31 @@ pub fn get_mpris_sources<'p>() -> impl Iterator<Item=MprisSource<'p>> {
         .find_all()
         .expect("Error finding all mpris players")
         .into_iter()
-        .map(|player| {
-            MprisSource {
-                player,
-            }
-        })
 }
 
-#[derive(Debug)]
 /// ScrobbleSource for MPRIS2
-pub struct MprisSource<'p> {
-    player: Player<'p>,
-}
+pub type MprisSource<'p> = Player<'p>;
 
-impl<'p> Iterator for MprisSource<'p> {
-    type Item = ScrobbleEvent;
+fn mpris_event_to_scrobble_event(ev: Result<Event, DBusError>) -> Option<ScrobbleEvent> {
+    println!("mpris event {:?}", ev);
 
-    fn next(&mut self) -> Option<ScrobbleEvent> {
-        let mut current_track_id: String = self.player.get_metadata()
-            .unwrap().track_id().to_owned();
+    use mpris::Event::*;
 
-        // XXX: we should only get one ProgressTracker,
-        // since I'm not sure whether the short time inbetween
-        // two next() calls drops events.
-        let mut progress_tracker = self.player.track_progress(100)
-            .expect("Cannot start progress tracker");
-
-        loop {
-            let (progress, was_refreshed) = progress_tracker.tick();
-            if ! was_refreshed { continue }
-
-            let meta = progress.metadata();
-
-            let track_id = meta.track_id();
-            if track_id == current_track_id {
-                continue;
-            }
-            current_track_id = track_id.to_owned();
-
-            let title = meta.title().unwrap().to_owned();
-            let artists = meta.artists().unwrap();
-            let artist = artists[0].clone();
-
-            let song = Song {
-                title,
-                artist,
-                .. Song::default()
-            };
-
-            // TODO: also emit a Scrobble event of the previous song
-            return Some(ScrobbleEvent::NowPlaying(song));
-        }
+    match ev.ok()? {
+        Playing => {
+            let song = Song::default();
+            Some(ScrobbleEvent::NowPlaying(song))
+        },
+        Paused => None,
+        Stopped => Some(ScrobbleEvent::Stopped),
+        ev => unimplemented!("mpris event: {:?}", ev),
     }
 }
 
-impl ScrobbleSource for MprisSource<'static> {
-    fn into_stream(self) -> Box<ScrobbleStream> {
-        Box::new(self)
+impl<'p> ScrobbleSource<'p> for MprisSource<'p> {
+    fn into_stream(&'p mut self) -> Box<Iterator<Item=ScrobbleEvent> + 'p> {
+        Box::new(self.events()
+                 .unwrap()
+                 .filter_map(mpris_event_to_scrobble_event))
     }
 }

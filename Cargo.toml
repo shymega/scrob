@@ -24,7 +24,7 @@ path = "src/bin/scrobblectl.rs"
 time = "0.1.39"
 mpd = "0.0.12"
 rusqlite = "0.13.0"
-mpris = "1.0.0"
+mpris = {git = "https://github.com/Mange/mpris-rs", branch="blocking-events"}
 
 [dependencies.clap]
 features = ["suggestions", "color", "wrap_help"]
