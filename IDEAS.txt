@@ -1,0 +1,15 @@
+Targets:
+
+- Arbitary HTTP target (POST/GET)
+- File target.
+- Script (cmdline args)
+- Script (STDIN)
+- Listenbrainz.
+- Libre.fm
+- Last.fm
+
+Sources:
+
+- Manual song injection.
+- MPRIS.
+- MPD.
