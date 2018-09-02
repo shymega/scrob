@@ -35,7 +35,7 @@ notifications:
   irc:
     channels:
       - "ircs://irc.mozilla.org:6697/#scrobble.rs"
-    nick: scrob-rs-travis
+    nick: scrobbers-ci
     on_success: never
     on_failure: always
     use_notice: true
