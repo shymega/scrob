@@ -22,4 +22,9 @@ API.
 A Rust library for Listenbrainz is also necessary for the target of the same
 name.
 
+## IRC
+
+If you want to have a real-time conversation, please do join the IRC channel for
+this project on Mozilla IRC, channel: `#scrobble.rs`.
+
 [rustfm]: https://github.com/RoxasShadow/rustfm
