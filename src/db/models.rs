@@ -1,7 +1,7 @@
 //! Models module for DB.
 
 /// Struct for a Song's DB entry
-#[derive(Debug)]
+#[derive(Debug, Default)]
 pub struct DbSong {
     id: i32,
     title: String,
