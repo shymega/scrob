@@ -28,7 +28,7 @@ addons:
       - texinfo
       - graphviz
       - libdbus-1-dev
-      - libdbus-1-3`
+      - libdbus-1-3
 
 notifications:
   email:
