@@ -13,7 +13,24 @@ Targets:
 
 Sources:
 
-- Manual song - inject entry via scrobblectl client.
+- Manual song - inject data via `scrobblers-ctl` client.
 - MPRIS.
 - MPD.
 - Polling a plain text file, using a structured format.
+
+## Logging
+
+Use `slog-rs` to print to terminal and file output.
+File output: JSON format, or plain text? Or Both?
+
+## Client/server protocol.
+
+Protocol will be definded later.
+
+Considering JSON-RPC or just plain text.
+
+## Database
+
+SQLite backend
+
+Design SQL schema required.
