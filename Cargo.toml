@@ -1,33 +1,40 @@
 [package]
 authors = ["Dom Rodriguez <shymega@shymega.org.uk>"]
+autobins = false
 description = "A modular scrobbler with variety."
-homepage = "https://github.com/shymega/scrobble.rs"
+homepage = "https://github.com/shymega/scrobblers"
 license = "GPL-3.0"
-name = "scrobble.rs"
+name = "scrobblers"
 readme = "README.md"
-repository = "https://github.com/shymega/scrobble.rs.git"
+repository = "https://github.com/shymega/scrobblers.git"
 version = "0.1.0"
 
 [lib]
-name = "scrobble"
+name = "scrobblers"
 path = "src/lib.rs"
 
 [[bin]]
-name = "scrobbled"
-path = "src/bin/scrobbled.rs"
+name = "scrobblersd"
+path = "src/bin/scrobblers-d.rs"
 
 [[bin]]
-name = "scrobblectl"
-path = "src/bin/scrobblectl.rs"
+name = "scrobblersctl"
+path = "src/bin/scrobblers-ctl.rs"
 
 [dependencies]
-time = "0.1.39"
 mpd = "0.0.12"
-rusqlite = "0.13.0"
+mpris = "1.1.0"
+rusqlite = "0.14.0"
+slog = "2.3.3"
+slog-async = "2.3.0"
+slog-json = "2.2.0"
+slog-scope = "4.0.1"
+slog-term = "2.4.0"
+time = "0.1.40"
 
 [dependencies.clap]
 features = ["suggestions", "color", "wrap_help"]
-version = "2.31.2"
+version = "2.32.0"
 
 [profile.release]
 lto = true
