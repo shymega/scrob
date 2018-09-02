@@ -1,5 +1,5 @@
 digraph scrobblers {
-    label = "\n\nscrobble.rs\nCore event loop flowchart.\n\nCreated by Dom Rodriguez (shymega)\n";
+    label = "\n\nScrobblers\nCore event loop flowchart.\n\nCreated by Dom Rodriguez (shymega)\n";
 
     rankdir = T;
     ranksep = 0.50;

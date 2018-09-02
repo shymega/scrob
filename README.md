@@ -1,9 +1,9 @@
-# scrobble.rs
+# Scrobblers.
 
 This is a modular audio scrobbler written in Rust. Supports multiple
 sources, such as MPRIS and MPD.
 
-scrobble.rs works with the concept of "sources" and "targets".
+Scrobblers works with the concept of "sources" and "targets".
 
 Targets are a *destination* for scrobbles, such as GNU FM (Libre.fm,
 for example), Last.fm or ListenBrainz.

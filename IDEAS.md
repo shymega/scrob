@@ -1,4 +1,4 @@
-# Ideas for Scrobble.rs
+# Ideas for Scrobblers.
 
 ## Sources/Targets.
 
