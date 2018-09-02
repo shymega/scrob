@@ -1,4 +1,4 @@
-sudo: required
+sudo: false
 language: rust
 
 cache:
@@ -27,6 +27,8 @@ addons:
       - binutils-dev
       - texinfo
       - graphviz
+      - libdbus-1-dev
+      - libdbus-1-3`
 
 notifications:
   email:
