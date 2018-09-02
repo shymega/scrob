@@ -1,4 +1,4 @@
-//! Utilities module for scrobble.rs.
+//! Utilities module for Scrobblers.
 
 /// Get the version from Cargo.
 pub fn get_version() -> String {
