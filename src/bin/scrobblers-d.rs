@@ -24,7 +24,9 @@ fn get_arguments() -> ArgMatches<'static> {
     App::new("scrobd")
         .version(VERSION)
         .author("Dom Rodriguez <shymega@shymega.org.uk>")
-        .about("A modular scrobbler for a variety of music players.")
+        .about(
+            "Scrobblers daemon: Modular scrobbler for your music."
+        )
         .arg(
             Arg::with_name("v")
                 .short("v")
@@ -39,5 +41,5 @@ fn main() {
     let args = get_arguments();
     let _verbosity_count = args.occurrences_of("v");
 
-    println!("scrobble starting NOW..");
+    unimplemented!();
 }

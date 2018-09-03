@@ -24,7 +24,7 @@ fn get_arguments() -> ArgMatches<'static> {
         .version(VERSION)
         .author("Dom Rodriguez <shymega@shymega.org.uk>")
         .about(
-            "A modular scrobbler for a variety of music players: control program",
+            "Client program for Scrobblers."
         )
         .arg(
             Arg::with_name("v")
@@ -38,6 +38,7 @@ fn get_arguments() -> ArgMatches<'static> {
 
 fn main() {
     let args = get_arguments();
-
     let _verbosity_count = args.occurrences_of("v");
+
+    unimplemented!();
 }
