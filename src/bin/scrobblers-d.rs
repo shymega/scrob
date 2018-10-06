@@ -14,7 +14,6 @@
 // along with Scrobblers.  If not, see <http://www.gnu.org/licenses/>
 
 extern crate clap;
-extern crate mpd;
 
 use clap::{App, Arg, ArgMatches};
 
