@@ -1,6 +1,9 @@
+.POSIX:
 .PHONY: all clean
 
-all: dests
+all: clean build
+
+build: dests
 
 dests: $(patsubst %.dot,%.png,$(wildcard *.dot)) \
 	   $(patsubst %.dot,%.svg,$(wildcard *.dot))

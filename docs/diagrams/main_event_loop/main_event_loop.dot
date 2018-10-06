@@ -11,7 +11,7 @@ digraph scrobblers {
     ];
 
     app_start [label = "Program entrypoint."];
-    evt0_loop_start [label = "Main event loop START."];
+    evt0_loop_start [label = "Main event loop."];
     
     song_changed [label="Song changed from arbitary source."];
 
@@ -23,4 +23,7 @@ digraph scrobblers {
 
     evt0_loop_start -> song_changed -> queue_to_scrobbleq;
     evt0_loop_start -> receive_client_message -> queue_to_clientq;
+
+    queue_to_scrobbleq -> evt0_loop_start;
+    queue_to_clientq -> evt0_loop_start;
 }
