@@ -3,8 +3,6 @@ SHELL := /bin/sh
 .POSIX:
 .PHONY: all
 
-# TODO: Dyanmic discovery of diagrams.
-
 all: diagrams
 
 diagrams:
