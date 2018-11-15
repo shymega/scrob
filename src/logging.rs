@@ -1,5 +1,3 @@
-//! The logging crate for Scrobblers.
-
 // This file is part of Scrobblers.
 
 // Scrobblers is free software: you can redistribute it and/or modify
@@ -15,6 +13,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Scrobblers.  If not, see <http://www.gnu.org/licenses/>
 
+//! The logging crate for Scrobblers.
+
 extern crate slog;
 extern crate slog_async;
 extern crate slog_envlogger;
@@ -24,11 +24,16 @@ use slog::{Drain, Logger};
 use slog_async::Async;
 use slog_term::{FullFormat, TermDecorator};
 
-/// Return logger.
+/// Initialise Logger.
 pub fn init_logger() -> Logger {
-    let decorator = TermDecorator::new().build();
-    let drain = FullFormat::new(decorator).build().fuse();
-    let drain = Async::new(drain).build().fuse();
+    let decorator = TermDecorator::new()
+        .build();
+    let drain = FullFormat::new(decorator)
+        .build()
+        .fuse();
+    let drain = Async::new(drain)
+        .build()
+        .fuse();
 
     Logger::root(drain, o!())
 }
