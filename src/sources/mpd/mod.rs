@@ -74,12 +74,11 @@ pub fn display_mpd_songs() {
 
             println!("**************************");
             println!("New song playing!");
-            println!(
-                "{title}, by {artist}",
-                title = song.title,
-                artist = song.artist
-            );
+            println!("{title}, by {artist}",
+                     title = song.title,
+                     artist = song.artist);
             println!("**************************");
+
         }
     }
 }
