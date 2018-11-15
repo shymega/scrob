@@ -21,15 +21,15 @@
         unused_qualifications)]
 
 extern crate mpd;
-extern crate time;
 extern crate mpris;
+extern crate time;
 
 #[macro_use]
 extern crate slog;
 
 extern crate slog_async;
-extern crate slog_term;
 extern crate slog_envlogger;
+extern crate slog_term;
 
 extern crate serde;
 
@@ -37,4 +37,3 @@ pub mod db;
 pub mod logging;
 pub mod sources;
 pub mod targets;
-pub mod utils;
