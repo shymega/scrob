@@ -96,6 +96,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "clippy"
+version = "0.0.302"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "term 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "config"
 version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -525,6 +533,7 @@ name = "scrobblers"
 version = "0.1.0"
 dependencies = [
  "clap 2.32.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "clippy 0.0.302 (registry+https://github.com/rust-lang/crates.io-index)",
  "config 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "mpd 0.0.12 (registry+https://github.com/rust-lang/crates.io-index)",
  "mpris 1.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -893,6 +902,7 @@ dependencies = [
 "checksum cfg-if 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)" = "0c4e7bb64a8ebb0d856483e1e682ea3422f883c5f5615a90d51a2c82fe87fdd3"
 "checksum chrono 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)" = "45912881121cb26fad7c38c17ba7daa18764771836b34fab7d3fbd93ed633878"
 "checksum clap 2.32.0 (registry+https://github.com/rust-lang/crates.io-index)" = "b957d88f4b6a63b9d70d5f454ac8011819c6efa7727858f458ab71c756ce2d3e"
+"checksum clippy 0.0.302 (registry+https://github.com/rust-lang/crates.io-index)" = "d911ee15579a3f50880d8c1d59ef6e79f9533127a3bd342462f5d584f5e8c294"
 "checksum config 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)" = "b5379dd8b3e7f488a31107d2c9586ce2ddbee2bc839201b3b38dbdf550351c1e"
 "checksum crossbeam 0.2.12 (registry+https://github.com/rust-lang/crates.io-index)" = "bd66663db5a988098a89599d4857919b3acf7f61402e61365acfd3919857b9be"
 "checksum darling 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = "2a78af487e4eb8f4421a1770687b328af6bb4494ca93435210678c6eea875c11"
