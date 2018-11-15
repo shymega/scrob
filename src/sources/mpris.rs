@@ -24,6 +24,8 @@ use mpris::{
 use sources::common::{ScrobbleEvent, ScrobbleSource, Song};
 
 /// Loop over MPRIS2 events, and display new artist/song combination.
+/// This is for debugging, and only enabled on a debug build.
+#[cfg(debug_assertions)]
 pub fn display_mpris_songs() {
     let mut sources = get_mpris_sources();
     let mut player = sources.next().unwrap(); /* add error handler */
