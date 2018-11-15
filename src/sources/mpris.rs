@@ -17,16 +17,11 @@
 //! It is currently a work in progress. This source needs a stable and
 //! well-tested D-Bus library for Rust.
 
-use mpris::{
-    DBusError, Event, LoopStatus, Metadata, PlaybackStatus, Player, PlayerFinder, Progress,
-    ProgressTracker,
-};
-use sources::common::{ScrobbleEvent, ScrobbleSource, Song};
+// use std::thread;
+use mpris::{DBusError, Event, LoopStatus, Metadata, PlaybackStatus, PlayerFinder, Progress, ProgressTracker, Player};
+use ::sources::common::{Song, ScrobbleEvent, ScrobbleSource};
 
 /// Loop over MPRIS2 events, and display new artist/song combination.
-///
-/// This is for debugging, and only enabled on a debug build.
-#[cfg(debug_assertions)]
 pub fn display_mpris_songs() {
     let mut sources = get_mpris_sources();
     let mut player = sources.next().unwrap(); /* add error handler */
@@ -37,7 +32,7 @@ pub fn display_mpris_songs() {
 }
 
 /// Returns an `Iterator` over all MPRIS2 sources available to the system.
-pub fn get_mpris_sources<'p>() -> impl Iterator<Item = MprisSource<'p>> {
+pub fn get_mpris_sources<'p>() -> impl Iterator<Item=MprisSource<'p>> {
     PlayerFinder::new()
         .expect("Could not start MPRIS player finder.")
         .find_all()
@@ -57,7 +52,7 @@ fn mpris_event_to_scrobble_event(ev: Result<Event, DBusError>) -> Option<Scrobbl
         Playing => {
             let song = Song::default();
             Some(ScrobbleEvent::NowPlaying(song))
-        }
+        },
         Paused => None,
         Stopped => Some(ScrobbleEvent::Stopped),
         ev => unimplemented!("MPRIS event: {:?}", ev),
@@ -65,11 +60,9 @@ fn mpris_event_to_scrobble_event(ev: Result<Event, DBusError>) -> Option<Scrobbl
 }
 
 impl<'p> ScrobbleSource<'p> for MprisSource<'p> {
-    fn into_stream(&'p mut self) -> Box<Iterator<Item = ScrobbleEvent> + 'p> {
-        Box::new(
-            self.events()
-                .unwrap()
-                .filter_map(mpris_event_to_scrobble_event),
-        )
+    fn into_stream(&'p mut self) -> Box<Iterator<Item=ScrobbleEvent> + 'p> {
+        Box::new(self.events()
+                 .unwrap()
+                 .filter_map(mpris_event_to_scrobble_event))
     }
 }
