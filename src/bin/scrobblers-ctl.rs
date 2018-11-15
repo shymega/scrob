@@ -17,20 +17,23 @@ extern crate clap;
 
 use clap::{App, Arg, ArgMatches};
 
-const VERSION: &str = env!("CARGO_PKG_VERSION");
+const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
 fn get_arguments() -> ArgMatches<'static> {
     App::new("scrobctl")
         .version(VERSION)
         .author("Dom Rodriguez <shymega@shymega.org.uk>")
-        .about("Client program for Scrobblers.")
+        .about(
+            "Client program for Scrobblers."
+        )
         .arg(
             Arg::with_name("v")
                 .short("v")
                 .multiple(true)
                 .required(false)
                 .help("Sets the level of logging verbosity."),
-        ).get_matches()
+        )
+        .get_matches()
 }
 
 fn main() {
