@@ -19,14 +19,14 @@ pub mod utils;
 
 extern crate mpd;
 
-use self::utils::get_tag;
+use mpd::Client;
 use mpd::idle::Idle;
 use mpd::idle::Subsystem::Player;
-use mpd::Client;
+use self::utils::get_tag;
 use std::net::TcpStream;
 use std::process::exit;
 
-use sources::common::Song;
+use ::sources::common::Song;
 
 fn get_mpd_conn(addr: &str) -> Client<TcpStream> {
     match Client::connect(addr) {
@@ -41,8 +41,6 @@ fn get_mpd_conn(addr: &str) -> Client<TcpStream> {
 }
 
 /// Loop over MPD `Player` events, and display the song and artist.
-/// This is for debugging, and only enabled on a debug build.
-#[cfg(debug_assertions)]
 pub fn display_mpd_songs() {
     let addr = "127.0.0.1:6600";
 
@@ -74,12 +72,11 @@ pub fn display_mpd_songs() {
 
             println!("**************************");
             println!("New song playing!");
-            println!(
-                "{title}, by {artist}",
-                title = song.title,
-                artist = song.artist
-            );
+            println!("{title}, by {artist}",
+                     title = song.title,
+                     artist = song.artist);
             println!("**************************");
+
         }
     }
 }
