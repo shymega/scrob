@@ -17,9 +17,11 @@
 //! It is currently a work in progress. This source needs a stable and
 //! well-tested D-Bus library for Rust.
 
-// use std::thread;
-use mpris::{DBusError, Event, LoopStatus, Metadata, PlaybackStatus, PlayerFinder, Progress, ProgressTracker, Player};
-use ::sources::common::{Song, ScrobbleEvent, ScrobbleSource};
+use mpris::{
+    DBusError, Event, LoopStatus, Metadata, PlaybackStatus, Player, PlayerFinder, Progress,
+    ProgressTracker,
+};
+use sources::common::{ScrobbleEvent, ScrobbleSource, Song};
 
 /// Loop over MPRIS2 events, and display new artist/song combination.
 pub fn display_mpris_songs() {

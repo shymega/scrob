@@ -19,14 +19,14 @@ pub mod utils;
 
 extern crate mpd;
 
-use mpd::Client;
+use self::utils::get_tag;
 use mpd::idle::Idle;
 use mpd::idle::Subsystem::Player;
-use self::utils::get_tag;
+use mpd::Client;
 use std::net::TcpStream;
 use std::process::exit;
 
-use ::sources::common::Song;
+use sources::common::Song;
 
 fn get_mpd_conn(addr: &str) -> Client<TcpStream> {
     match Client::connect(addr) {
