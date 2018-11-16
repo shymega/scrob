@@ -18,5 +18,3 @@
 mod common;
 pub mod mpd;
 pub mod mpris;
-
-use self::common::{ScrobbleEvent, ScrobbleSource, Song};
