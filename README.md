@@ -13,6 +13,8 @@ as MPD, or MPRIS
 
 ## Project status
 
+Working on project locally. Refactoring to introduce async, worker proceses, error handling
+
 I'm currently waiting on the further development of [rustfm][rustfm],
 which I am hoping will be able to support both GNU FM and Last.fm, of
 which implement the Audioscrobbler API. This allows for a greater
