@@ -14,7 +14,7 @@
 // along with Scrobblers.  If not, see <http://www.gnu.org/licenses/>
 
 /// Struct for a song representation.
-#[derive(Debug)]
+#[derive(Debug, Default)]
 pub struct Song {
     pub title: String,
     pub artist: String,
@@ -39,19 +39,18 @@ impl Song {
             composer: String::new(),
         }
     }
-
-    pub fn default() -> Song {
-        Song::new()
-    }
 }
 
 #[derive(Debug)]
 pub enum ScrobbleEvent {
     NowPlaying(Song),
+    Paused, /* new */
     Stopped,
     Scrobble(Song),
 }
 
-pub trait ScrobbleSource<'a> {
-    fn into_stream(&'a mut self) -> Box<Iterator<Item = ScrobbleEvent> + 'a>;
+pub trait ScrobbleSource<'p> {
+    fn into_stream(&'p mut self) ->
+        Box<Iterator<
+            Item=ScrobbleEvent> + 'p>;
 }

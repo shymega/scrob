@@ -22,9 +22,12 @@ use std::collections::BTreeMap;
 pub type SongTags = BTreeMap<String, String>;
 
 /// This function takes tags of SongTags type, and a tag to retrieve.
-pub fn get_tag(tags: &SongTags, tag: &str) -> Option<String> {
+pub fn get_tag(tags: &SongTags, tag: &str) -> Result<String, String> {
+    /* I'd like to tidy this up a bit. I don't think I'm using `Result<>` correctly, and I don't
+     * like the way I've written it either.
+     * TODO: Tidy/refactor, make idiomatic. */
     match tags.get(tag) {
-        Some(t) => Some(t.to_string()),
-        None => None,
+        Some(x) => Ok(x.to_string()),
+        None => Ok("None defined".to_string()),
     }
 }
