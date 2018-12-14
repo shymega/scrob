@@ -33,7 +33,6 @@ extern crate slog_term;
 
 extern crate serde;
 
-pub mod db;
 pub mod logging;
 pub mod sources;
 pub mod targets;
