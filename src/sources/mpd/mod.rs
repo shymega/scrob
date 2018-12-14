@@ -26,7 +26,7 @@ use mpd::Client;
 use std::net::TcpStream;
 use std::process::exit;
 
-use sources::common::Song;
+use super::common::Song;
 
 fn get_mpd_conn(addr: &str) -> Client<TcpStream> {
     match Client::connect(addr) {
@@ -63,22 +63,23 @@ pub fn display_mpd_songs() {
                 continue;
             } else {
                 song.title = s.title.unwrap();
-                song.album = get_tag(&tags, "Album").unwrap();
-                song.album_artist = get_tag(&tags, "AlbumArtist").unwrap();
-                song.artist = get_tag(&tags, "Artist").unwrap();
-                song.date = get_tag(&tags, "Date").unwrap();
-                song.genre = get_tag(&tags, "Genre").unwrap();
-                song.track = get_tag(&tags, "Track").unwrap();
-                song.composer = get_tag(&tags, "Composer").unwrap();
+                song.album = get_tag(&tags, "Album").unwrap_or(String::new());
+                song.album_artist = get_tag(&tags, "AlbumArtist").unwrap_or(String::new());
+                song.artist = get_tag(&tags, "Artist").unwrap_or(String::new());
+                song.date = get_tag(&tags, "Date").unwrap_or(String::new());
+                song.genre = get_tag(&tags, "Genre").unwrap_or(String::new());
+                song.track = get_tag(&tags, "Track").unwrap_or(String::new());
+                song.composer = get_tag(&tags, "Composer").unwrap_or(String::new());
             }
 
             println!("**************************");
             println!("New song playing!");
-            println!("{title}, by {artist}",
-                     title = song.title,
-                     artist = song.artist);
+            println!(
+                "{title}, by {artist}",
+                title = song.title,
+                artist = song.artist
+            );
             println!("**************************");
-
         }
     }
 }
