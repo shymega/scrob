@@ -17,29 +17,28 @@ extern crate clap;
 
 use clap::{App, Arg, ArgMatches};
 
-const VERSION: &str = env!("CARGO_PKG_VERSION");
+const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
 fn get_arguments() -> ArgMatches<'static> {
     App::new("scrobd")
         .version(VERSION)
         .author("Dom Rodriguez <shymega@shymega.org.uk>")
-        .about("Scrobblers daemon: Modular scrobbler for your music.")
+        .about(
+            "Scrobblers daemon: Modular scrobbler for your music."
+        )
         .arg(
             Arg::with_name("v")
                 .short("v")
                 .multiple(true)
                 .required(false)
                 .help("Sets the level of logging verbosity."),
-        ).get_matches()
+        )
+        .get_matches()
 }
 
 fn main() {
     let args = get_arguments();
     let _verbosity_count = args.occurrences_of("v");
 
-    #[cfg(debug_assertions)]
-    display_mpris_songs();
-
-    #[cfg(not(debug_assertions))]
     unimplemented!();
 }
