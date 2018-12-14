@@ -10,20 +10,26 @@ digraph scrobblers {
         style = rounded
     ];
 
-    app_start [label = "Program started."]
-    evt0_loop_start [label = "Main event loop."];
+    app_start [label = "Start scrobbler."];
+    main_evt_loop_start [label = "Main event loop."];
     
-    song_changed [label="Song changed from arbitary source."];
-
+    song_changed [label="Song changed from source."];
     queue_to_scrobbleq [label="Queue song change to Scrobble queue."];
-    receive_rpc [label="Received RPC call."];
-    queue_to_rpcq [label="Queue client message to RPC queue for processing"];
 
-    app_start -> evt0_loop_start;
+    rpcq_receive [label="Received RPC message."];
 
-    evt0_loop_start -> song_changed -> queue_to_scrobbleq;
-    evt0_loop_start -> receive_client_message -> queue_to_clientq;
+    rpcq_parse [label="Parse RPC message."];
+    rpcq_command [label="Process RPC command."];
+    rpcq_ret_loop [label="Return to RPC loop."];
+    rpcq_loop [label="RPC event loop."];
 
-    queue_to_scrobbleq -> evt0_loop_start;
-    queue_to_clientq -> evt0_loop_start;
+    app_start -> main_evt_loop_start;
+    main_evt_loop_start -> rpcq_loop;
+
+    main_evt_loop_start -> rpcq_receive -> rpcq_parse;
+    rpcq_parse -> rpcq_command -> rpcq_ret_loop -> rpcq_loop;
+
+    main_evt_loop_start -> song_changed -> queue_to_scrobbleq;
+
+    queue_to_scrobbleq -> main_evt_loop_start;
 }
