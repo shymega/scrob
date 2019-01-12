@@ -14,18 +14,26 @@
 // along with Scrobblers.  If not, see <http://www.gnu.org/licenses/>
 
 extern crate clap;
+extern crate scrobblers as scrob;
+
+#[macro_use]
+extern crate slog;
+extern crate slog_async;
+extern crate slog_term;
 
 use clap::{App, Arg, ArgMatches};
+use slog::Drain;
 
-const VERSION: &'static str = env!("CARGO_PKG_VERSION");
+#[cfg(debug_assertions)]
+use scrob::sources::mpris;
+
+const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 fn get_arguments() -> ArgMatches<'static> {
-    App::new("scrobctl")
+    App::new("scrobd")
         .version(VERSION)
         .author("Dom Rodriguez <shymega@shymega.org.uk>")
-        .about(
-            "Client program for Scrobblers."
-        )
+        .about("Scrobblers daemon: Modular scrobbler for your music.")
         .arg(
             Arg::with_name("v")
                 .short("v")
@@ -38,7 +46,25 @@ fn get_arguments() -> ArgMatches<'static> {
 
 fn main() {
     let args = get_arguments();
-    let _verbosity_count = args.occurrences_of("v");
+    let min_log_level = match args.occurrences_of("v") {
+        0 => slog::Level::Info,
+        1 => slog::Level::Debug,
+        2 | _ => slog::Level::Trace,
+    };
 
-    unimplemented!();
+    /* initialise logger */
+    let decorator = slog_term::TermDecorator::new().build();
+
+    let drain = slog_term::FullFormat::new(decorator).build().fuse();
+    let drain = slog::LevelFilter::new(drain, min_log_level).fuse();
+    let drain = slog_async::Async::new(drain).build().fuse();
+
+    let log = slog::Logger::root(drain, o!());
+
+    /* logger initialised */
+
+    info!(log, "Starting scrobblers..");
+
+    #[cfg(debug_assertions)]
+    mpris::display_mpris_songs();
 }
