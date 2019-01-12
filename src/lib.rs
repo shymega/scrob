@@ -15,10 +15,15 @@
 
 //! The library for Scrobblers.
 
-#![deny(missing_docs, missing_debug_implementations,
-        missing_copy_implementations, trivial_casts,
-        trivial_numeric_casts, unused_import_braces,
-        unused_qualifications)]
+#![deny(
+    missing_copy_implementations,
+    missing_debug_implementations,
+    missing_docs,
+    trivial_numeric_casts,
+    unsafe_code,
+    unused_import_braces,
+    unused_qualifications
+)]
 
 extern crate mpd;
 extern crate mpris;
@@ -26,9 +31,7 @@ extern crate time;
 
 #[macro_use]
 extern crate slog;
-
 extern crate slog_async;
-extern crate slog_envlogger;
 extern crate slog_term;
 
 extern crate serde;
