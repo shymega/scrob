@@ -14,7 +14,7 @@ after_script:
   - "script/after_cibuild"
 
 rust:
-  - nightly
+  - stable
 
 addons:
   apt:
