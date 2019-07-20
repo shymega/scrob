@@ -1,4 +1,4 @@
-// This file is part of Scrobblers..
+// This file is part of Scrobblers.
 
 // Scrobblers is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -13,8 +13,5 @@
 // You should have received a copy of the GNU General Public License
 // along with Scrobblers.  If not, see <http://www.gnu.org/licenses/>
 
-//! This module defines the MPD and MPRIS sources.
-
-mod common;
-pub mod mpd;
-pub mod mpris;
+//! This module handles communication between the Scrobblers daemon and client.
+//! We use Tokio and JSON-RPC ([de]serialisation with Serde) behind the scenes.
