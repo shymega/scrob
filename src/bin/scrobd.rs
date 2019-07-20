@@ -14,7 +14,6 @@
 // along with Scrobblers.  If not, see <http://www.gnu.org/licenses/>
 
 extern crate clap;
-extern crate scrobblers as scrob;
 
 #[macro_use]
 extern crate slog;
@@ -24,16 +23,13 @@ extern crate slog_term;
 use clap::{App, Arg, ArgMatches};
 use slog::Drain;
 
-#[cfg(debug_assertions)]
-use scrob::sources::mpris;
-
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 fn get_arguments() -> ArgMatches<'static> {
     App::new("scrobd")
         .version(VERSION)
         .author("Dom Rodriguez <shymega@shymega.org.uk>")
-        .about("Scrobblers daemon: Modular scrobbler for your music.")
+        .about("Scrobblers daemon")
         .arg(
             Arg::with_name("v")
                 .short("v")
@@ -44,6 +40,22 @@ fn get_arguments() -> ArgMatches<'static> {
         .get_matches()
 }
 
+fn init_logger(min_log_level: slog::Level) -> slog::Logger {
+    /* initialise decorator */
+    let decorator = slog_term::TermDecorator::new().build();
+
+    /* create drain - terminal formatting */
+    let drain = slog_term::FullFormat::new(decorator).build().fuse();
+
+    /* adjust drain - set minimum level to log at */
+    let drain = slog::LevelFilter::new(drain, min_log_level).fuse();
+
+    let drain = slog_async::Async::new(drain).build().fuse();
+
+    /* return Logger instance */
+    return slog::Logger::root(drain, o!());
+}
+
 fn main() {
     let args = get_arguments();
     let min_log_level = match args.occurrences_of("v") {
@@ -52,19 +64,9 @@ fn main() {
         2 | _ => slog::Level::Trace,
     };
 
-    /* initialise logger */
-    let decorator = slog_term::TermDecorator::new().build();
-
-    let drain = slog_term::FullFormat::new(decorator).build().fuse();
-    let drain = slog::LevelFilter::new(drain, min_log_level).fuse();
-    let drain = slog_async::Async::new(drain).build().fuse();
-
-    let log = slog::Logger::root(drain, o!());
-
-    /* logger initialised */
+    let log = init_logger(min_log_level);
 
     info!(log, "Starting scrobblers..");
 
-    #[cfg(debug_assertions)]
-    mpris::display_mpris_songs();
+    unimplemented!();
 }

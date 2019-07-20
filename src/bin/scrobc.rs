@@ -26,10 +26,10 @@ use slog::Drain;
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 fn get_arguments() -> ArgMatches<'static> {
-    App::new("scrobctl")
+    App::new("scrobc")
         .version(VERSION)
         .author("Dom Rodriguez <shymega@shymega.org.uk>")
-        .about("Scrobblers client: Modular scrobbler for your music.")
+        .about("Scrobblers client")
         .arg(
             Arg::with_name("v")
                 .short("v")
@@ -43,10 +43,13 @@ fn get_arguments() -> ArgMatches<'static> {
 fn init_logger(min_log_level: slog::Level) -> slog::Logger {
     /* initialise decorator */
     let decorator = slog_term::TermDecorator::new().build();
+
     /* create drain - terminal formatting */
     let drain = slog_term::FullFormat::new(decorator).build().fuse();
+
     /* adjust drain - add minimum level to log at */
     let drain = slog::LevelFilter::new(drain, min_log_level).fuse();
+
     /* adjust drain - make async */
     let drain = slog_async::Async::new(drain).build().fuse();
 
@@ -61,8 +64,6 @@ fn main() {
         1 => slog::Level::Debug,
         2 | _ => slog::Level::Trace,
     };
-
-    let _verbosity_count = args.occurrences_of("v");
 
     let log = init_logger(min_log_level);
 
