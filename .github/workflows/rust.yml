@@ -11,9 +11,9 @@ jobs:
     - uses: actions/checkout@v1
     - name: Update aptitude
       run: sudo apt-get update
-    - name: Install dependencies
+    - name: Install libdbus-1-dev
       run: sudo apt-get install -y libdbus-1-dev
-    - name: Build
+    - name: Build scrobblers
       run: cargo build --verbose
-    - name: Run tests
+    - name: Run tests for scrobblers
       run: cargo test --verbose
