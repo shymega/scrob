@@ -4,10 +4,6 @@ version = "0.1.0"
 authors = ["Dom Rodriguez <shymega@shymega.org.uk"]
 edition = "2018"
 
-[[bin]]
-name = "scrobctl"
-path = "src/bin/scrobctl.rs"
-
 [dependencies]
 slog = "2.5.2"
 slog-async = "2.3.0"
