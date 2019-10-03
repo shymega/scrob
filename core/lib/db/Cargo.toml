@@ -5,12 +5,16 @@ authors = ["Dom Rodriguez <shymega@shymega.org.uk"]
 edition = "2018"
 
 [dependencies]
-diesel = "1.4.2"
 time = "0.1.42"
 slog = "2.5.2"
 slog-async = "2.3.0"
 slog-scope = "4.1.2"
 slog-term = "2.4.1"
+dotenv = "0.10"
+
+[dependencies.diesel]
+version = "1.4.2"
+features = ["sqlite"]
 
 [dependencies.clippy]
 version = "0.0.302"
