@@ -6,14 +6,15 @@ edition = "2018"
 
 [dependencies]
 jsonrpc = "0.11.0"
-jsonrpc-core = "4.0"
-jsonrpc-tcp-server = "13.2"
-jsonrpc-ipc-server = "13.2"
+jsonrpc-core = "14.0.5"
+jsonrpc-tcp-server = "14.0.6"
+jsonrpc-ipc-server = "14.0.7"
+
 slog = "2.5.2"
-slog-async = "2.3.0"
-slog-scope = "4.1.2"
-slog-term = "2.4.1"
+slog-async = "2.4.0"
+slog-scope = "4.3.0"
+slog-term = "2.5.0"
 
 [dependencies.clippy]
-version = "0.0.302"
+version = "*"
 optional = true

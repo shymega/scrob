@@ -4,3 +4,4 @@ table! {
         name -> Text,
     }
 }
+

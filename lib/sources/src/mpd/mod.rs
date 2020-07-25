@@ -26,7 +26,7 @@ use mpd::Client;
 use std::net::TcpStream;
 use std::process::exit;
 
-use super::common::Song;
+use common::Song;
 
 fn get_mpd_conn(addr: &str) -> Client<TcpStream> {
     match Client::connect(addr) {

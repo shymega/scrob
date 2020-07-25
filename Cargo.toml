@@ -1,10 +1,10 @@
 [workspace]
 members = [
-    "core/daemon",
-    "core/lib/db",
-    "core/lib/rpc",
-    "core/lib/sources",
-    "core/lib/targets",
-    "core/lib/dyn",
-    "clients/cli"
+    "lib/db",
+    "lib/rpc",
+    "lib/sources",
+    "lib/targets",
+    "lib/dyn",
+    "bin/controllers/cli",
+    "bin/daemon"
 ]

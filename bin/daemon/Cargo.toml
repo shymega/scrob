@@ -14,16 +14,16 @@ path = "src/lib.rs"
 
 [dependencies]
 slog = "2.5.2"
-slog-async = "2.3.0"
-slog-scope = "4.1.2"
-slog-term = "2.4.1"
-sources = { path = "../lib/sources" }
-rpc = { path = "../lib/rpc" }
-db = { path = "../lib/db" }
-targets = { path = "../lib/targets" }
+slog-async = "2.4.0"
+slog-scope = "4.3.0"
+slog-term = "2.5.0"
+sources = { path = "../../lib/sources" }
+rpc = { path = "../../lib/rpc" }
+db = { path = "../../lib/db" }
+targets = { path = "../../lib/targets" }
 
 [dependencies.clippy]
-version = "0.0.302"
+version = "*"
 optional = true
 
 [dependencies.clap]

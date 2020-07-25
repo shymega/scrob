@@ -56,7 +56,7 @@ fn mpris_event_to_scrobble_event(ev: Result<Event, DBusError>) -> Option<Scrobbl
             Some(ScrobbleEvent::NowPlaying(song))
         }
         Event::Paused => None,
-        Event::Stopped => Some(ScrobbleEvent::Stopped),
+        Event::Stopped => Some(ScrobbleEvent::NotActive),
         ev => {
             println!("MPRIS data: {:?}", ev);
             None

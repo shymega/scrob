@@ -1,5 +1,6 @@
+
 [package]
-name = "cli"
+name = "scrobblers-controllers-cli"
 version = "0.1.0"
 authors = ["Dom Rodriguez <shymega@shymega.org.uk"]
 edition = "2018"
