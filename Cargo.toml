@@ -8,3 +8,8 @@ members = [
     "bin/controllers/cli",
     "bin/daemon"
 ]
+
+[profile.release]
+lto = "on"
+opt-level = 'z'
+codegen-units = 1
