@@ -1,0 +1,107 @@
+name: CI worker for the scrobblers
+
+env:
+    CARGO_TOML_COLOR: always
+
+on: [push, pull_request]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Retrieve Scrobblers source code from GitHub
+        uses: actions/checkout@v1
+
+      - name: Install latest (stable channel) Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          default: true
+          override: true
+
+      - name: Update package lists
+        run: sudo apt-get update
+
+       #- name: Install libdbus-1-dev support package
+       #run: sudo apt-get install -y libdbus-1-dev
+
+      - name: Build Scrobblers
+        run: cargo build --all --release
+
+      - name: Strip Scrobblers binaries
+        run: strip ./target/release/scrobblersctl && strip ./target/release/scrobblersd
+
+      - name: Rename binaries
+        run: mv ./target/release/scrobblersctl ./target/release/scrobblersctl-linux && mv ./target/release/scrobblersd ./target/release/scrobblersd-linux
+
+      - name: Create release of Scrobblers
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ./target/release/scrobblersctl
+            ./target/release/scrobblersd
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build-win:
+    runs-on: windows-latest
+
+    steps:
+
+     - name: Retrieve Scrobblers source code from GitHub
+       uses: actions/checkout@v1
+
+     - name: Install latest (stable channel) Rust toolchain
+       uses: actions-rs/toolchain@v1
+       with:
+         toolchain: stable
+         default: true
+         override: true
+
+     - name: Build Scrobblers
+       run: cargo build --all --release
+
+     - name: Create release of Scrobblers
+       uses: softprops/action-gh-release@v1
+       if: startsWith(github.ref, 'refs/tags/')
+       with:
+        files: |
+           ./target/release/scrobblersctl.exe
+           ./target/release/scrobblersd.exe
+       env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+build-mac:
+    runs-on: macos-latest
+
+    steps:
+     - name: Retrieve Scrobblers source code from GitHub
+       uses: actions/checkout@v1
+
+     - name: Install latest (stable channel) Rust toolchain
+       uses: actions-rs/toolchain@v1
+       with:
+         toolchain: stable
+         target: x86_64-apple-darwin
+         default: true
+         override: true
+
+     - name: Build Scrobblers
+       run: cargo build --all --release
+
+
+     - name: Rename Scrobblers binaries
+       run: ./target/release/scrobblersctl ./target/release/scrobblersctl-darwin && mv ./target/release/scrobblersd ./target/release/scrobblersd-darwin
+
+
+     - name: Create release of Scrobblers
+       uses: softprops/action-gh-release@v1
+       if: startsWith(github.ref, 'refs/tags/')
+       with:
+        files: |
+           ./target/release/scrobblersctl-darwin
+           ./target/release/scrobblersd-darwin
+       env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
