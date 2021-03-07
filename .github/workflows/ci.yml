@@ -23,8 +23,8 @@ jobs:
       - name: Update package lists
         run: sudo apt-get update
 
-       #- name: Install libdbus-1-dev support package
-       #run: sudo apt-get install -y libdbus-1-dev
+      - name: Install libdbus-1-dev support package
+        run: sudo apt-get install -y libdbus-1-dev
 
       - name: Build Scrobblers
         run: cargo build --all --release
@@ -73,7 +73,7 @@ jobs:
        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-build-mac:
+  build-mac:
     runs-on: macos-latest
 
     steps:
@@ -90,7 +90,6 @@ build-mac:
 
      - name: Build Scrobblers
        run: cargo build --all --release
-
 
      - name: Rename Scrobblers binaries
        run: ./target/release/scrobblersctl ./target/release/scrobblersctl-darwin && mv ./target/release/scrobblersd ./target/release/scrobblersd-darwin
