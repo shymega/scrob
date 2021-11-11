@@ -1,9 +1,10 @@
-# Scrobblers.
+# scrob.
+=====
 
 This is a modular audio scrobbler written in Rust. Supports multiple
 sources, such as MPRIS and MPD.
 
-Scrobblers works with the concept of "sources" and "targets".
+scrob works with the concept of "sources" and "targets".
 
 Targets are a *destination* for scrobbles, such as GNU FM (Libre.fm,
 for example), Last.fm or ListenBrainz.
@@ -17,18 +18,7 @@ Working on project locally. Refactoring to introduce queues, worker
 threads,and proper error handling - especially with sources and
 targets.
 
-I'm currently waiting on the further development of [rustfm][rustfm],
-which I am hoping will be able to support both GNU FM and Last.fm, of
-which implement the Audioscrobbler API. This allows for a greater
-range of services to be supported, as long as they support the aforementioned
-API.
-
-A Rust library for Listenbrainz is also necessary for the target of the same
-name. I will be looking into that.
-
 ## IRC
 
-If you want to have a real-time conversation, please join the IRC channel for
-this project on Mozilla IRC, channel: `#scrobble.rs`.
-
-[rustfm]: https://github.com/RoxasShadow/rustfm
+If you want to have a real-time conversation, feel free to drop in the IRC
+channel for this project on Libera.chat - `#scrob`

@@ -1,15 +1,72 @@
-[workspace]
-members = [
-    "lib/db",
-    "lib/rpc",
-    "lib/sources",
-    "lib/targets",
-    "lib/dyn",
-    "bin/controllers/cli",
-    "bin/daemon"
-]
+[package]
+name = "scrob"
+version = "0.1.0"
+authors = ["Dom Rodriguez <shymega@shymega.org.uk"]
+edition = "2018"
+publish = false
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/shymega/scrob"
+description = "A modular scrobbler in Rust."
+categories = ["scrobbler"]
+keywords = ["scrobbler", "modular", "mpris", "mpd"]
+
+[[bin]]
+name = "scrobctl"
+test = false
+bench = false
+
+[[bin]]
+name = "scrobd"
+test = false
+bench = false
+
+[lib]
+name = "scrob"
+path = "src/lib.rs"
+
+[dependencies]
+time = "0.3.4"
+slog = "2.7.0"
+slog-async = "2.7.0"
+slog-scope = "4.4.0"
+slog-term = "2.8.0"
+dotenv = "0.15.0"
+mpris = { version = "1.1.2", optional = true }
+mpd = { version = "0.0.12", optional = true }
+jsonrpc = "0.12.0"
+jsonrpc-core = "18.0.0"
+jsonrpc-tcp-server = "18.0.0"
+jsonrpc-ipc-server = "18.0.0"
+clap = "2.33.3"
+
+[features]
+default = []
+mpris-target = ["mpris"]
+mpd-target = ["mpd"]
+
+[dependencies.diesel]
+version = "1.4.8"
+features = ["sqlite"]
+
+[profile.dev]
+lto = true
+opt-level = 3
+codegen-units = 1
+debug = true
+
+[profile.dev.package."*"]
+codegen-units = 1
+opt-level = 3
+debug = true
 
 [profile.release]
-lto = "on"
-opt-level = 'z'
+lto = true
+opt-level = 3
 codegen-units = 1
+debug = false
+
+[profile.release.package."*"]
+codegen-units = 1
+opt-level = 3
+debug = false

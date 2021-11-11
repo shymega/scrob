@@ -1,0 +1,4 @@
+enum StockTargets {
+    StdoutJsonOutput,
+    StdinJsonInput,
+}
