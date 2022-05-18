@@ -1,3 +1,4 @@
+//! Main client code for `scrob`.
 #![deny(
     missing_copy_implementations,
     missing_debug_implementations,
