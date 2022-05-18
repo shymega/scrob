@@ -1,10 +1,10 @@
-# scrob.
+scrob
 =====
 
-This is a modular audio scrobbler written in Rust. Supports multiple
-sources, such as MPRIS and MPD.
+Welcome, to the future of audio scrobblers! Meet scrob: an extendable audio
+scrobbler written in Rust.
 
-scrob works with the concept of "sources" and "targets".
+scrob works with the concepts of 'sources' and 'targets'.
 
 Targets are a *destination* for scrobbles, such as GNU FM (Libre.fm,
 for example), Last.fm or ListenBrainz.
