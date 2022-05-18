@@ -10,18 +10,3 @@ pub struct Song {
     pub track: String,
     pub composer: String,
 }
-
-impl Song {
-    pub fn new() -> Song {
-        Song {
-            title: String::new(),
-            artist: String::new(),
-            album: String::new(),
-            album_artist: String::new(),
-            date: String::new(),
-            genre: String::new(),
-            track: String::new(),
-            composer: String::new(),
-        }
-    }
-}
