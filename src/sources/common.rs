@@ -1,4 +1,4 @@
-/// Struct for a song representation.
+/// Struct for a song.
 #[derive(Debug, Default, Clone)]
 pub struct Song {
     pub title: String,
