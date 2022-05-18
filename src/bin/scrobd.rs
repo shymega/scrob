@@ -14,21 +14,23 @@
     variant_size_differences
 )]
 
-use clap::{App, Arg, ArgMatches};
+use clap::{Arg, ArgMatches, Command};
 
-fn get_arguments() -> ArgMatches<'static> {
-    App::new("scrobd")
-        .version(env!("CARGO_PKG_VERSION"))
-        .author("Dom Rodriguez <shymega@shymega.org.uk>")
-        .about("scrob daemon")
-        .arg(
-            Arg::with_name("v")
-                .short("v")
-                .multiple(true)
-                .required(false)
-                .help("Sets the level of logging verbosity."),
-        )
-        .get_matches()
+fn get_arguments() -> Option<ArgMatches> {
+    Some(
+        Command::new("scrobd")
+            .version(env!("CARGO_PKG_VERSION"))
+            .author("Dom Rodriguez <shymega@shymega.org.uk>")
+            .about("scrob daemon")
+            .arg(
+                Arg::new("v")
+                    .short('v')
+                    .multiple_occurrences(true)
+                    .required(false)
+                    .help("Sets the level of logging verbosity."),
+            )
+            .get_matches(),
+    )
 }
 
 fn main() {
