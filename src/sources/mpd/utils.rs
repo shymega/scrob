@@ -9,7 +9,7 @@ pub type SongTags = BTreeMap<String, String>;
 /// This function takes tags of SongTags type, and a tag to retrieve.
 pub fn get_tag(tags: &SongTags, tag: &str) -> Option<String> {
     match tags.get(tag) {
-        Some(t) => Some(t.to_string()),
+        Some(t) => Some(t),
         None => None,
     }
 }
