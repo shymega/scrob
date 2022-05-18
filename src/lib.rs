@@ -1,4 +1,5 @@
 #![deny(
+    warnings,
     missing_copy_implementations,
     missing_debug_implementations,
 //    missing_docs, temp disable
