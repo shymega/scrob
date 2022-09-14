@@ -4,6 +4,7 @@ use std::io::stdout;
 
 use slog_async::Async;
 
+/// Initialize and return a `slog::Logger`, filtering at the `slog::Level` type.
 pub fn initialise_logger(lvl: Level) -> Logger {
     let decorator = PlainDecorator::new(stdout());
     let drain = FullFormat::new(decorator).build().fuse();

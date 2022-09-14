@@ -2,6 +2,7 @@ use diesel::prelude::*;
 use dotenv::dotenv;
 use std::env;
 
+#[allow(dead_code)]
 pub fn establish_connection() -> SqliteConnection {
     dotenv().ok();
 

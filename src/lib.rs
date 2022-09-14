@@ -1,3 +1,4 @@
+//! Associated crate for the `scrob` binaries.
 #![deny(
     warnings,
     missing_copy_implementations,
