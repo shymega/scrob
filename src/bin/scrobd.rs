@@ -18,9 +18,8 @@
 
 use clap::{Arg, ArgMatches, Command};
 
-fn get_arguments() -> Option<ArgMatches> {
-    Some(
-        Command::new("scrobd")
+fn get_arguments() -> ArgMatches {
+    Command::new("scrobd")
             .version(env!("CARGO_PKG_VERSION"))
             .author("Dom Rodriguez <shymega@shymega.org.uk>")
             .about("scrob daemon")
@@ -31,12 +30,20 @@ fn get_arguments() -> Option<ArgMatches> {
                     .required(false)
                     .help("Sets the level of logging verbosity."),
             )
-            .get_matches(),
-    )
+            .subcommand(Command::new("spawn")
+                .alias("init")
+                .alias("start")
+                .about("Spawn the `scrobd` daemon."))
+            .get_matches()
 }
 
 fn main() {
-    let _args = get_arguments();
+    let args = get_arguments();
 
-    unimplemented!();
+    if args.is_present("spawn") {
+        println!("This command is not implemented yet.");
+        todo!();
+    }
+
+    todo!()
 }
