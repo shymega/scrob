@@ -37,13 +37,19 @@ fn get_arguments() -> ArgMatches {
             .get_matches()
 }
 
+fn handle_spawn_subcommand() {
+    println!("This command is not implemented yet.");
+    todo!();
+}
+
 fn main() {
     let args = get_arguments();
 
-    if args.is_present("spawn") {
-        println!("This command is not implemented yet.");
-        todo!();
+    match args.subcommand_name() {
+        Some("spawn") => {
+            handle_spawn_subcommand();
+        }
+        _ => {}
     }
-
     todo!()
 }
