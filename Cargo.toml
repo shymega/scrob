@@ -38,7 +38,7 @@ jsonrpc = "0.13.0"
 jsonrpc-core = "18.0.0"
 jsonrpc-tcp-server = "18.0.0"
 jsonrpc-ipc-server = "18.0.0"
-clap = "3.2.22"
+clap = "4.0.0"
 
 [features]
 default = []
