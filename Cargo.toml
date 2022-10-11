@@ -46,7 +46,7 @@ mpris-target = ["mpris"]
 mpd-target = ["mpd"]
 
 [dependencies.diesel]
-version = "2.0.1"
+version = "2.0.2"
 features = ["sqlite"]
 
 [profile.dev]
