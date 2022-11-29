@@ -34,7 +34,7 @@ slog-term = "2.9.0"
 dotenv = "0.15.0"
 mpris = { version = "1.1.2", optional = true }
 mpd = { version = "0.0.12", optional = true }
-jsonrpc = "0.13.0"
+jsonrpc = "0.14.0"
 jsonrpc-core = "18.0.0"
 jsonrpc-tcp-server = "18.0.0"
 jsonrpc-ipc-server = "18.0.0"
