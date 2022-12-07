@@ -31,10 +31,7 @@ fn get_arguments() -> ArgMatches {
                 .required(false)
                 .help("Sets the level of logging verbosity."),
         )
-        .subcommand(
-            Command::new("spawn")
-                .about("Spawn the `scrobd` daemon."),
-        )
+        .subcommand(Command::new("spawn").about("Spawn the `scrobd` daemon."))
         .get_matches()
 }
 
