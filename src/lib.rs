@@ -15,6 +15,7 @@
     unused_extern_crates,
     variant_size_differences
 )]
+#![allow(dead_code)]
 
 #[macro_use]
 extern crate slog;
