@@ -1,19 +1,46 @@
 name: CI workflow
 
-on: [push, pull_request]
+on:
+    workflow_dispatch:
+    push:
+    pull_request:
 
 jobs:
-  build:
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: true
+            matrix:
+                rust-channel:
+                    - stable
+                    - beta
+                    - nightly
 
-    runs-on: ubuntu-latest
+                cpu-target:
+                    - x86_64-unknown-linux-musl
+                    - x86_64-unknown-linux-gnu
+                    - aarch64-unknown-linux-musl
+                    - aarch64-unknown-linux-gnu
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Update aptitude
-      run: sudo apt-get update
-    - name: Install libdbus-1-dev
-      run: sudo apt-get install -y libdbus-1-dev
-    - name: Build scrobblers
-      run: cargo build --verbose
-    - name: Run tests for scrobblers
-      run: cargo test --verbose
+        steps:
+            - uses: actions/checkout@v3
+            - name: Cache Rust assets
+              id: rust-cache
+              uses: Swatinem/rust-cache@v2
+            - name: Configure Rust toolchain
+              if: steps.rust-cache.outputs.cache-hit != 'true'
+              uses: actions-rs/toolchain@v1
+              with:
+                  toolchain: ${{ matrix.rust-channel }}
+                  default: true
+                  override: true
+                  target: ${{ matrix.cpu-target }}
+                  profile: minimal
+            - name: Update aptitude
+              run: sudo apt-get update
+            - name: Install libdbus-1-dev for MPRIS
+              run: sudo apt-get install -y libdbus-1-dev
+            - name: Build scrob
+              run: cargo build
+            - name: Run tests for scrob
+              run: cargo test
