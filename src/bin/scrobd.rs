@@ -16,25 +16,26 @@
     variant_size_differences
 )]
 
-use clap::{Arg, ArgMatches, Command};
+use clap::{Arg, ArgAction, ArgMatches, Command};
 
 fn get_arguments() -> ArgMatches {
     Command::new("scrobd")
-            .version(env!("CARGO_PKG_VERSION"))
-            .author("Dom Rodriguez <shymega@shymega.org.uk>")
-            .about("scrob daemon")
-            .arg(
-                Arg::new("v")
-                    .short('v')
-                    .multiple_occurrences(true)
-                    .required(false)
-                    .help("Sets the level of logging verbosity."),
-            )
-            .subcommand(Command::new("spawn")
-                .alias("init")
-                .alias("start")
-                .about("Spawn the `scrobd` daemon."))
-            .get_matches()
+        .version(env!("CARGO_PKG_VERSION"))
+        .author("Dom Rodriguez <shymega@shymega.org.uk>")
+        .subcommand_required(true)
+        .about("scrob daemon")
+        .arg(
+            Arg::new("verbosity")
+                .short('v')
+                .action(ArgAction::Count)
+                .required(false)
+                .help("Sets the level of logging verbosity."),
+        )
+        .subcommand(
+            Command::new("spawn")
+                .about("Spawn the `scrobd` daemon."),
+        )
+        .get_matches()
 }
 
 fn handle_spawn_subcommand() {
