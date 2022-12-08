@@ -32,7 +32,6 @@ slog-async = "2.7.0"
 slog-scope = "4.4.0"
 slog-term = "2.9.0"
 dotenv = "0.15.0"
-libsqlite3-sys = { version = ">=0.17.2, <0.26.0", optional = true, features = ["bundled_bindings"] }
 jsonrpc = "0.14.0"
 jsonrpc-core = "18.0.0"
 jsonrpc-tcp-server = "18.0.0"
