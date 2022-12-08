@@ -4,3 +4,5 @@ pre-build = ["dpkg --add-architecture armhf && apt-get update && apt-get install
 [target.armv7-unknown-linux-musleabihf]
 pre-build = ["dpkg --add-architecture armhf && apt-get update && apt-get install --assume-yes libsqlite3-dev:armhf"]
 
+[target.aarch64-unknown-linux-musl]
+pre-build = ["dpkg --add-architecture arm64 && apt-get update && apt-get install --assume-yes libsqlite3-dev:arm64"]
