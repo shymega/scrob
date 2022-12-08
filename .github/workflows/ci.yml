@@ -13,7 +13,6 @@ jobs:
             matrix:
                 rust-channel:
                     - stable
-                    - nightly
 
                 cpu-target:
                     - x86_64-unknown-linux-musl
