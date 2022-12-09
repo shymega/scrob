@@ -40,7 +40,7 @@ jobs:
               with:
                   crate: cross
                   version: latest
-                  use-tool-cache: false
+                  use-tool-cache: true
             - name: Build project in debug mode
               uses: actions-rs/cargo@v1
               with:
