@@ -1,4 +1,4 @@
-name: CI (debug) workflow
+name: CI (debug builds) workflow
 
 on:
     workflow_dispatch:
