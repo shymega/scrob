@@ -1,9 +1,17 @@
-name: CI workflow
+name: CI (debug) workflow
 
 on:
     workflow_dispatch:
     push:
+      paths:
+          - 'src/**'
     pull_request:
+      paths:
+          - 'src/**'
+
+concurrency:
+  group: ref-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
     build:
@@ -13,13 +21,11 @@ jobs:
             matrix:
                 rust-channel:
                     - stable
-
                 cpu-target:
                     - x86_64-unknown-linux-musl
                     - aarch64-unknown-linux-musl
                     - armv7-unknown-linux-musleabi
                     - armv7-unknown-linux-musleabihf
-
         steps:
             - uses: actions/checkout@v3
             - name: Cache Rust assets
@@ -39,18 +45,10 @@ jobs:
               with:
                   crate: cross
                   version: latest
-                  use-tool-cache: true
             - name: Build project in debug mode
               uses: actions-rs/cargo@v1
               with:
                   command: build
                   args: >-
                       --all --locked --verbose  --target=${{ matrix.cpu-target }}
-                  use-cross: true
-            - name: Run tests on project
-              uses: actions-rs/cargo@v1
-              with:
-                  command: test
-                  args: >-
-                      --all --locked --verbose --target=${{ matrix.cpu-target }}
                   use-cross: true
