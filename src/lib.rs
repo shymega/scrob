@@ -17,9 +17,6 @@
 )]
 #![allow(dead_code)]
 
-#[macro_use]
-extern crate slog;
-
 mod db;
 mod rpc;
 mod sources;

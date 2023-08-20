@@ -16,7 +16,7 @@
     variant_size_differences
 )]
 
-use clap::{Arg, ArgAction, ArgMatches, Command};
+use clap::{ArgMatches, Command};
 
 fn get_arguments() -> ArgMatches {
     Command::new("scrobd")
@@ -24,13 +24,6 @@ fn get_arguments() -> ArgMatches {
         .author("Dom Rodriguez <shymega@shymega.org.uk>")
         .subcommand_required(true)
         .about("scrob daemon")
-        .arg(
-            Arg::new("verbosity")
-                .short('v')
-                .action(ArgAction::Count)
-                .required(false)
-                .help("Sets the level of logging verbosity."),
-        )
         .subcommand(Command::new("spawn").about("Spawn the `scrobd` daemon."))
         .get_matches()
 }

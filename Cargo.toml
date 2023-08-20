@@ -27,10 +27,6 @@ path = "src/lib.rs"
 
 [dependencies]
 time = "0.3.20"
-slog = "2.7.0"
-slog-async = "2.7.0"
-slog-scope = "4.4.0"
-slog-term = "2.9.0"
 dotenv = "0.15.0"
 jsonrpc = "0.14.1"
 jsonrpc-core = "18.0.0"
