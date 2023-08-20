@@ -12,7 +12,7 @@ on:
           - 'src/**'
 
 concurrency:
-  group: ref-${{ github.ref }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
