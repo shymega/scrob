@@ -29,7 +29,7 @@ jobs:
                     - armv7-unknown-linux-musleabi
                     - armv7-unknown-linux-musleabihf
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
             - name: Cache Rust assets
               id: rust-cache
               uses: Swatinem/rust-cache@v2
