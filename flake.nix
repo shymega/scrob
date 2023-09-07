@@ -1,44 +1,69 @@
-{
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-  inputs.nci.url = "github:yusdacra/nix-cargo-integration";
-  inputs.nci.inputs.nixpkgs.follows = "nixpkgs";
-  inputs.parts.url = "github:hercules-ci/flake-parts";
-  inputs.parts.inputs.nixpkgs-lib.follows = "nixpkgs";
+# SPDX-FileCopyrightText: 2023 Dom Rodriguez
+#
+# SPDX-License-Identifier: MIT
 
-  outputs = inputs @ {
-    parts,
-    nci,
-    ...
-  }:
-    parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux"];
-      imports = [nci.flakeModule];
-      perSystem = {
-        pkgs,
-        config,
-        ...
-      }: let
-        # TODO: change this to your crate's name
-        crateName = "scrob";
-        # shorthand for accessing this crate's outputs
-        # you can access crate outputs under `config.nci.outputs.<crate name>` (see documentation)
-        crateOutputs = config.nci.outputs.${crateName};
-      in {
-        # declare projects
-        # relPath is the relative path of a project to the flake root
-        # TODO: change this to your crate's path
-        nci.projects.${crateName}.relPath = "";
-        # configure crates
-        nci.crates.${crateName} = {
-          # export crate (packages and devshell) in flake outputs
-          # alternatively you can access the outputs and export them yourself (see below)
-          export = true;
-          # look at documentation for more options
-        };
-        # export the crate devshell as the default devshell
-        devShells.default = crateOutputs.devShell;
-        # export the release package of the crate as default package
-        packages.default = crateOutputs.packages.release;
-      };
+{
+  inputs = {
+    flake-utils.url = "github:numtide/flake-utils";
+    naersk.url = "github:nix-community/naersk";
+
+    nixpkgs-mozilla = {
+      url = "github:mozilla/nixpkgs-mozilla";
+      flake = false;
     };
+  };
+
+  outputs = { self, flake-utils, naersk, nixpkgs, nixpkgs-mozilla }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = (import nixpkgs) {
+          inherit system;
+
+          overlays = [
+            (import nixpkgs-mozilla)
+          ];
+        };
+
+        toolchain = (pkgs.rustChannelOf {
+          date = "2023-08-03";
+          channel = "stable";
+          sha256 = "sha256-R0F0Risbr74xg9mEYydyebx/z0Wu6HI0/KWwrV30vZo=";
+        }).rust.override {
+          targets = [
+            "x86_64-unknown-linux-musl"
+            "armv7-unknown-linux-musleabi"
+            "armv7-unknown-linux-musleabihf"
+            "aarch64-unknown-linux-musl"
+          ];
+          extensions = [
+            "rust-src"
+            "rustfmt-preview"
+            "llvm-tools-preview"
+          ];
+        };
+
+        naersk' = pkgs.callPackage naersk {
+          cargo = toolchain;
+          rustc = toolchain;
+        };
+
+      in
+      rec {
+        # For `nix build` & `nix run`:
+        defaultPackage = naersk'.buildPackage {
+          src = ./.;
+          nativeBuildInputs = with pkgs; [ pkg-config ];
+          buildInputs = with pkgs; [ systemd.dev protobuf ];
+          cargoBuildOptions = (opts: opts ++ [ "--all-features" "--all-targets" ]);
+          release = true;
+          singleStep = true;
+        };
+
+        # For `nix develop` (optional, can be skipped):
+        devShell = pkgs.mkShell {
+          nativeBuildInputs = [ toolchain ] ++ (with pkgs; [ pkg-config ]);
+          buildInputs = with pkgs; [ systemd.dev protobuf ];
+        };
+      }
+    );
 }
