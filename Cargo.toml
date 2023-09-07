@@ -40,7 +40,7 @@ clap = "4.4.2"
 env_logger = "0.10.0"
 log = "0.4.20"
 anyhow = "1.0.75"
-thiserror = "1.0.47"
+thiserror = "1.0.48"
 diesel = { version = "2.1.1", features = ["sqlite"] }
 libsqlite3-sys = { version = "0.26.0", features = ["bundled"] }
 tokio = { version = "1.32.0", features = ["full"] }
