@@ -14,14 +14,10 @@ pub(crate) enum DbError {
 
 pub(crate) type DbResult<T, E = DbError> = anyhow::Result<T, E>;
 
-pub(crate) fn establish_connection(
-) -> DbResult<SqliteConnection> {
-    dotenv().ok()
-        .ok_or(DbError::DotEnvMissing)?;
+pub(crate) fn establish_connection() -> DbResult<SqliteConnection> {
+    dotenv().ok().ok_or(DbError::DotEnvMissing)?;
 
-    let url = env::var("DATABASE_URL")
-        .map_err(DbError::EnvVarMissing)?;
+    let url = env::var("DATABASE_URL").map_err(DbError::EnvVarMissing)?;
 
-    SqliteConnection::establish(&url)
-        .map_err(DbError::SqliteConnectionFailure)
+    SqliteConnection::establish(&url).map_err(DbError::SqliteConnectionFailure)
 }
