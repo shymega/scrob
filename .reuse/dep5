@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: scrob
+Upstream-Contact: Dom Rodriguez <shymega+scrob@shymega.org.uk>
+Source: https://github.com/shymega/scrob
+
+Files: src/* migrations/** .github/**
+Copyright: 2023 Dom Rodriguez <shymega+scrob@shymega.org.uk>
+License: MIT

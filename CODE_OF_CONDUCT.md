@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2023 Dom Rodriguez
+
+SPDX-License-Identifier: MIT
+-->
+
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge
