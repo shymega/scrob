@@ -3,23 +3,25 @@ use dotenv::dotenv;
 use std::env::{self, VarError};
 
 #[derive(Debug, thiserror::Error)]
-pub(crate) enum DbInitialisationError {
+pub(crate) enum DbError {
     #[error("Error connecting to SQLite database.")]
-    SqliteConnectionError(#[source] ConnectionError),
+    SqliteConnectionFailure(#[source] ConnectionError),
     #[error("Error getting env vars.")]
-    EnvVarError(#[source] VarError),
+    EnvVarMissing(#[source] VarError),
     #[error("Error with `.env`. Is it created?")]
-    DotEnvGetError,
+    DotEnvMissing,
 }
 
+pub(crate) type DbResult<T, E = DbError> = anyhow::Result<T, E>;
+
 pub(crate) fn establish_connection(
-) -> Result<SqliteConnection, DbInitialisationError> {
+) -> DbResult<SqliteConnection> {
     dotenv().ok()
-        .ok_or(DbInitialisationError::DotEnvGetError)?;
+        .ok_or(DbError::DotEnvMissing)?;
 
     let url = env::var("DATABASE_URL")
-        .map_err(DbInitialisationError::EnvVarError)?;
+        .map_err(DbError::EnvVarMissing)?;
 
-    Ok(SqliteConnection::establish(&url)
-        .map_err(DbInitialisationError::SqliteConnectionError)?)
+    SqliteConnection::establish(&url)
+        .map_err(DbError::SqliteConnectionFailure)
 }
