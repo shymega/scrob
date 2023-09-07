@@ -36,11 +36,9 @@ fn handle_spawn_subcommand() {
 fn main() {
     let args = get_arguments();
 
-    match args.subcommand_name() {
-        Some("spawn") => {
-            handle_spawn_subcommand();
-        }
-        _ => {}
+    if let Some("spawn") = args.subcommand_name() {
+        handle_spawn_subcommand();
     }
+
     todo!();
 }
