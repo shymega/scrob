@@ -19,5 +19,5 @@ pub(crate) type SongTags = BTreeMap<String, String>;
 
 /// This function takes tags of SongTags type, and a tag to retrieve.
 pub(crate) fn get_tag(tags: &SongTags, tag: &str) -> String {
-    tags.get(tag).map(String::to_string).expect("Unable to get tag from `Option<String>`.")
+    tags.get(tag).map(String::to_string).unwrap_or_default()
 }
