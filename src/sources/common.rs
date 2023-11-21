@@ -13,11 +13,11 @@ pub(crate) struct Song {
     composer: Option<String>,
 }
 
-/// SongTags is a representation of the tags associated with a
-/// song. This is a BTreeMap with two Strings.
+/// `SongTags` is a representation of the tags associated with a
+/// song. This is a `BTreeMap` with two Strings.
 pub(crate) type SongTags = BTreeMap<String, String>;
 
-/// This function takes tags of SongTags type, and a tag to retrieve.
+/// This function takes tags of `SongTags` type, and a tag to retrieve.
 pub(crate) fn get_tag(tags: &SongTags, tag: &str) -> String {
     tags.get(tag).map(String::to_string).unwrap_or_default()
 }
