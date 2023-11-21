@@ -20,4 +20,4 @@ mod db;
 mod rpc;
 mod sources;
 mod targets;
-pub mod utils;
+mod utils;
