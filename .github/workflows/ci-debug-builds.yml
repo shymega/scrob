@@ -5,11 +5,13 @@ on:
     push:
       paths:
           - "Cargo.*"
-          - 'src/**'
+          - 'bin/**'
+          - 'lib/**'
     pull_request:
       paths:
           - "Cargo.*"
-          - 'src/**'
+          - 'bin/**'
+          - 'lib/**'
 
 concurrency:
   group: ci-${{ github.ref }}

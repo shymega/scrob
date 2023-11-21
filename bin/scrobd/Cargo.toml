@@ -1,0 +1,10 @@
+[package]
+name = "scrobd"
+version = { workspace = true }
+rust-version = { workspace = true }
+license = { workspace = true }
+repository = { workspace = true }
+readme = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
