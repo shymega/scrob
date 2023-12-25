@@ -30,7 +30,7 @@ name = "scrob"
 path = "src/lib.rs"
 
 [dependencies]
-time = "0.3.30"
+time = "0.3.31"
 dotenv = "0.15.0"
 jsonrpc = "0.16.0"
 jsonrpc-core = "18.0.0"
