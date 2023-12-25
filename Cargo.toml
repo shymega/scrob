@@ -30,7 +30,7 @@ name = "scrob"
 path = "src/lib.rs"
 
 [dependencies]
-time = "0.3.30"
+time = "0.3.31"
 dotenv = "0.15.0"
 jsonrpc = "0.16.0"
 jsonrpc-core = "18.0.0"
@@ -39,11 +39,11 @@ jsonrpc-ipc-server = "18.0.0"
 clap = "4.4.11"
 env_logger = "0.10.1"
 log = "0.4.20"
-anyhow = "1.0.75"
+anyhow = "1.0.76"
 thiserror = "1.0.51"
 diesel = { version = "2.1.4", features = ["sqlite"] }
 libsqlite3-sys = { version = "0.27.0", features = ["bundled"] }
-tokio = { version = "1.35.0", features = ["full"] }
+tokio = { version = "1.35.1", features = ["full"] }
 
 [profile.dev]
 lto = true
